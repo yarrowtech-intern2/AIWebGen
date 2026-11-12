@@ -17,18 +17,19 @@ Each milestone ends with something you can run and check. Milestones are built i
 - A CLI smoke script: `npm run agent:try -- "make a bakery landing page"` writes files to `./.tmp-site`
 - **Check:** the same prompt works with `AI_PROVIDER=claude-code` and with `AI_PROVIDER=anthropic-api`
 
-### M2: Builder UI (Static kit)
-- Three-panel layout: chat | preview | code (with resizable panels)
+### M2: Builder UI (Static kit) ✅ (2026-11-12)
+- Resizable layout: chat | tabs (Preview / Code)
 - `POST /api/projects/:id/chat` as an SSE stream; streaming chat bubbles; "files changed" chips; a stop button
 - Static preview route + sandboxed iframe + device-size toggle
 - File tree + Monaco editor with save
+- Projects saved in SQLite under the demo user (accounts arrive in M3); simple project list + "new project" form on `/`
 - **Check:** prompt, watch the site appear, then ask for an edit and see it reflected
 
 ### M3: Projects, versions, accounts
 - Email/password register + login (Auth.js Credentials), protected routes
 - Dashboard: list / create (pick a kit) / rename / delete projects
 - One version per AI turn and per manual save; history panel with restore
-- Chat history saved and replayed as context
+- ~~Chat history saved and replayed as context~~ (done in M2)
 - **Check:** two users can't see each other's projects; restoring v1 brings back the original files
 
 ### M4: React kit, templates, export

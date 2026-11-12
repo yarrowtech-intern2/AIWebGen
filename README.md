@@ -2,7 +2,7 @@
 
 An AI website builder: describe a site, and Claude builds it by editing a virtual project, then refines it as you chat. See [projectDetails.md](projectDetails.md) for the product brief and [docs/](docs/) for the architecture, roadmap and decision log.
 
-**Status:** M0 (scaffold) and M1 (AI core) are done. The builder UI is next (M2).
+**Status:** M0–M2 are done: AI core plus the builder UI (chat, live preview, code editor). Next is M3 (accounts, version history).
 
 ## Requirements
 
@@ -20,7 +20,14 @@ npm run db:seed             # demo user
 npm run dev                 # http://localhost:3000
 ```
 
-## Try the AI agent from the terminal (M1)
+## Use the builder
+
+1. `npm run dev`, then open http://localhost:3000
+2. Create a project (Static kit), then describe your site in the chat
+3. Watch the Preview tab update as Claude writes files. Switch to Code to view or edit them (Ctrl+S saves)
+4. Keep chatting to change the site. Stop cancels a running turn
+
+## Try the AI agent from the terminal
 
 ```bash
 npm run agent:try -- "a landing page for a bakery in Kolkata"
@@ -56,7 +63,9 @@ Both providers drive the same file tools (`list_files`, `read_file`, `write_file
 src/kits/            site kits (static, react-vite): starter files + framework rules
 src/server/ai/       provider layer, tools, prompts, runner
   providers/         claude-code.ts (Agent SDK) · anthropic-api.ts (Messages API)
-src/server/projects/ virtual file store
+src/app/               pages (/, /project/[id]), API routes, /preview file server
+src/components/builder chat, preview and code panels
+src/server/projects/   file stores (memory, DB) and project service
 src/server/db.ts     Prisma client (SQLite via better-sqlite3 adapter)
 prisma/              schema, migrations, seed
 scripts/agent-try.ts terminal smoke test

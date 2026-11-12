@@ -1,9 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  // Native / subprocess-spawning packages must not be bundled.
+  serverExternalPackages: [
+    "@anthropic-ai/claude-agent-sdk",
+    "better-sqlite3",
+    "@prisma/adapter-better-sqlite3",
+  ],
   turbopack: {
     rules: {
       "*.css": {
