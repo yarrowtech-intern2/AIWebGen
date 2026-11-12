@@ -1,5 +1,5 @@
 // AgentWebBuilder data model. See docs/ARCHITECTURE.md §7.
-// SQLite in development; switch `provider` to "postgresql" for production.
+// PostgreSQL in development and production (Render Postgres).
 
 generator client {
   provider = "prisma-client"
@@ -7,7 +7,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model User {

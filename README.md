@@ -7,6 +7,7 @@ An AI website builder: describe a site, and Claude builds it by editing a virtua
 ## Requirements
 
 - Node.js 20+ (developed on 24)
+- PostgreSQL 14+ running locally
 - For local testing: the [Claude Code](https://code.claude.com) CLI, logged in (`claude`, then log in once)
 - For production: an Anthropic API key
 
@@ -14,8 +15,9 @@ An AI website builder: describe a site, and Claude builds it by editing a virtua
 
 ```bash
 npm install                 # also generates the Prisma client
-cp .env.example .env        # defaults: AI_PROVIDER=claude-code, SQLite
-npm run db:migrate          # creates dev.db
+cp .env.example .env        # set DATABASE_URL to your local Postgres
+createdb agentwebbuilder    # or create it in pgAdmin
+npm run db:migrate          # creates the tables
 npm run db:seed             # demo user: demo@example.com / demo12345 (development only)
 npm run dev                 # http://localhost:3000
 ```
@@ -51,6 +53,17 @@ Other settings: `AI_MODEL` (default `claude-opus-5-5`), `AI_EFFORT` (`low`…`ma
 
 Both providers drive the same file tools (`list_files`, `read_file`, `write_file`, `edit_file`, `delete_file`) against a virtual project. Claude has no shell and no access to the real disk.
 
+## Deploy to Render
+
+[render.yaml](render.yaml) is a Render Blueprint for a Node web service (Starter) and a managed Postgres database.
+
+1. Push the repo to GitHub
+2. In Render: **New -> Blueprint**, then pick the repo
+3. Enter `ANTHROPIC_API_KEY` when asked. `AUTH_SECRET` is generated and `DATABASE_URL` is wired to the database automatically
+4. Apply. Every deploy builds, runs `prisma migrate deploy`, then starts `next start`
+
+Change `region` in render.yaml (both entries) to the one closest to your users before the first deploy.
+
 ## Scripts
 
 | Script | What it does |
@@ -71,7 +84,7 @@ src/components/builder chat, preview and code panels
 src/server/projects/   file stores (memory, DB) and project service
 src/server/auth/      sessions, passwords, rate limiting
 src/proxy.ts          login redirects
-src/server/db.ts     Prisma client (SQLite via better-sqlite3 adapter)
+src/server/db.ts     Prisma client (PostgreSQL via adapter-pg)
 prisma/              schema, migrations, seed
 scripts/agent-try.ts terminal smoke test
 ```

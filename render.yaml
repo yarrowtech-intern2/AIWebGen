@@ -1,0 +1,45 @@
+# Render Blueprint: web service + managed Postgres.
+# Deploy: Render dashboard -> New -> Blueprint -> pick this repo.
+# Keep the service and database in the same region so they talk over the private network.
+
+databases:
+  - name: agentwebbuilder-db
+    plan: basic-256mb
+    region: singapore
+    databaseName: agentwebbuilder
+    user: agentwebbuilder
+    postgresMajorVersion: "17"
+
+services:
+  - type: web
+    name: agentwebbuilder
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm ci && npm run build
+    # Runs after a successful build, before the new version goes live.
+    preDeployCommand: npx prisma migrate deploy
+    startCommand: npm start
+    healthCheckPath: /login
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: agentwebbuilder-db
+          property: connectionString
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: AI_PROVIDER
+        value: anthropic-api
+      - key: ANTHROPIC_API_KEY
+        sync: false # prompted for in the dashboard on first deploy
+      - key: AI_MODEL
+        value: claude-opus-5-5
+      - key: AI_EFFORT
+        value: medium
+      - key: AI_MAX_STEPS
+        value: "40"
+      - key: AI_FALLBACKS
+        value: "on"

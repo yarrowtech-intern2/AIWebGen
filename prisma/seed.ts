@@ -2,12 +2,12 @@
 // - Demo login: demo@example.com / demo12345 (development only)
 // - Backfills a first version for projects created before version history existed.
 import "dotenv/config";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
 import { PrismaClient } from "../src/generated/prisma/client";
 
 const db = new PrismaClient({
-  adapter: new PrismaBetterSqlite3({ url: process.env.DATABASE_URL! }),
+  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL! }),
 });
 
 async function main() {

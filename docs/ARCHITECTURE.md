@@ -48,7 +48,7 @@ flowchart LR
 | AI (testing) | `@anthropic-ai/claude-agent-sdk`, using the developer's local Claude Code login |
 | AI (production) | `@anthropic-ai/sdk`, with `ANTHROPIC_API_KEY` |
 | Validation | `zod` (tool input schemas, API bodies) |
-| DB / ORM | Prisma; SQLite (`file:./dev.db`) for development, Postgres later |
+| DB / ORM | Prisma with PostgreSQL (`@prisma/adapter-pg`) in development and production |
 | Auth | Own small session module: `bcryptjs` password hashes, HS256 JWT (`jose`) in an httpOnly SameSite=Lax cookie; `src/proxy.ts` handles optimistic redirects (see D19) |
 | Export | `jszip` |
 
@@ -258,7 +258,7 @@ agentwebbuilder/
 | `AI_MODEL` | `claude-opus-5-5` | Overrides the default model |
 | `AI_EFFORT` | `medium` | `low`, `medium`, `high`, `xhigh` or `max` |
 | `ANTHROPIC_API_KEY` | `sk-ant-…` | Required only for `anthropic-api` |
-| `DATABASE_URL` | `file:./dev.db` | Postgres URL in production |
+| `DATABASE_URL` | `postgresql://…/agentwebbuilder` | Local Postgres in development; set from Render Postgres in production |
 | `AUTH_SECRET` | random 32+ chars | Signs session cookies and preview tokens. Changing it logs everyone out |
 
 ## 11. Risks & mitigations
