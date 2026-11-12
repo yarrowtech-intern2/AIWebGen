@@ -11,6 +11,9 @@ import { useIsMobile } from "@/hooks/use-is-mobile";
 import { autostartKey } from "@/lib/autostart";
 import { readEventStream } from "@/lib/chat-events";
 import { cn } from "@/lib/utils";
+import type { IntegrationStatus, Provider } from "@/components/integrations/connect-form";
+import { GitHubToolsToggle } from "@/components/integrations/github-tools-toggle";
+import { PublishDialog, type PublishInfo } from "@/components/integrations/publish-dialog";
 import { BuilderHeader } from "./builder-header";
 import { ChatPanel } from "./chat-panel";
 import { HistoryPanel } from "./history-panel";
@@ -41,7 +44,7 @@ export type BuilderMessage = {
   usage?: { inputTokens: number; outputTokens: number; costUsd?: number };
 };
 
-export type ProjectInfo = { id: string; name: string; kit: string };
+export type ProjectInfo = { id: string; name: string; kit: string; githubToolsEnabled: boolean; published: PublishInfo };
 
 type Props = {
   project: ProjectInfo;
@@ -50,13 +53,22 @@ type Props = {
   initialMessages: BuilderMessage[];
   initialPreviewToken: string;
   busyOnLoad: boolean;
+  initialIntegrations: Record<Provider, IntegrationStatus>;
 };
 
 type View = "chat" | "preview" | "code" | "history";
 
 let activityCounter = 0;
 
-export function Builder({ project: initialProject, userEmail, initialFiles, initialMessages, initialPreviewToken, busyOnLoad }: Props) {
+export function Builder({
+  project: initialProject,
+  userEmail,
+  initialFiles,
+  initialMessages,
+  initialPreviewToken,
+  busyOnLoad,
+  initialIntegrations,
+}: Props) {
   const isMobile = useIsMobile();
   const [project, setProject] = useState(initialProject);
   const [files, setFiles] = useState(initialFiles);
@@ -70,6 +82,7 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
   const [previewToken, setPreviewToken] = useState(initialPreviewToken);
   const [historyKey, setHistoryKey] = useState(0);
   const [buildErrors, setBuildErrors] = useState<string[]>([]);
+  const [integrations, setIntegrations] = useState(initialIntegrations);
   const [selectedPath, setSelectedPath] = useState<string | null>(
     "index.html" in initialFiles ? "index.html" : (Object.keys(initialFiles)[0] ?? null),
   );
@@ -293,6 +306,15 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
       onStop={stop}
       onOpenFile={openFile}
       onShowPreview={isMobile ? () => show("preview") : undefined}
+      composerExtras={
+        <GitHubToolsToggle
+          projectId={project.id}
+          github={integrations.github}
+          onGithubChange={(github) => setIntegrations((i) => ({ ...i, github }))}
+          enabled={project.githubToolsEnabled && integrations.github.connected}
+          onEnabledChange={(githubToolsEnabled) => setProject((p) => ({ ...p, githubToolsEnabled }))}
+        />
+      }
     />
   );
   const preview = (
@@ -342,6 +364,7 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
         userEmail={userEmail}
         onRenamed={(name) => setProject((p) => ({ ...p, name }))}
         actions={
+          <>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" asChild>
@@ -352,6 +375,16 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
             </TooltipTrigger>
             <TooltipContent>Download as ZIP</TooltipContent>
           </Tooltip>
+          <PublishDialog
+            projectId={project.id}
+            projectName={project.name}
+            integrations={integrations}
+            onIntegrationsChange={setIntegrations}
+            published={project.published}
+            onPublished={(published) => setProject((p) => ({ ...p, published }))}
+            disabled={running}
+          />
+          </>
         }
       />
 

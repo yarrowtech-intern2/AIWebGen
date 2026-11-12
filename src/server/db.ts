@@ -11,6 +11,7 @@ function createClient() {
 // Reuse one client across hot reloads in development.
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
-export const db = globalForPrisma.prisma ?? createClient();
+// After `prisma generate` the PrismaClient class changes; drop a client cached from the old one.
+export const db = globalForPrisma.prisma instanceof PrismaClient ? globalForPrisma.prisma : createClient();
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;

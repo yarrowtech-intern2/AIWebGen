@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
+import { GITHUB_MCP_SERVER, GITHUB_MCP_URL, GITHUB_TOOL_ALLOWLIST } from "../github-mcp";
 import type { ToolSpec } from "../tools";
 import type { AgentEvent, AgentProvider, AgentRunRequest, AiConfig } from "../types";
 
@@ -21,7 +22,7 @@ export class AnthropicApiProvider implements AgentProvider {
   constructor(private config: AiConfig) {}
 
   async run(req: AgentRunRequest, emit: (event: AgentEvent) => void): Promise<void> {
-    const tools: Anthropic.Beta.BetaTool[] = req.tools.specs.map((spec) => ({
+    const tools: Anthropic.Beta.BetaToolUnion[] = req.tools.specs.map((spec) => ({
       name: spec.name,
       description: spec.description,
       input_schema: toInputSchema(spec),
@@ -34,7 +35,22 @@ export class AnthropicApiProvider implements AgentProvider {
       { role: "user", content: `${req.turnContext}\n\n${req.userMessage}` },
     ];
 
+    // GitHub MCP (server-side connector): only allowlisted tools are enabled.
+    const mcpServers: Anthropic.Beta.BetaRequestMCPServerURLDefinition[] = [];
+    if (req.github) {
+      mcpServers.push({ type: "url", url: GITHUB_MCP_URL, name: GITHUB_MCP_SERVER, authorization_token: req.github.token });
+      tools.push({
+        type: "mcp_toolset",
+        mcp_server_name: GITHUB_MCP_SERVER,
+        default_config: { enabled: false },
+        configs: Object.fromEntries(GITHUB_TOOL_ALLOWLIST.map((name) => [name, { enabled: true }])),
+      });
+    }
+
     const useFallbacks = process.env.AI_FALLBACKS !== "off";
+    const betas: string[] = [];
+    if (useFallbacks) betas.push("server-side-fallback-2026-07-01");
+    if (req.github) betas.push("mcp-client-2025-11-20");
     const usage = { input: 0, output: 0, cacheRead: 0 };
     const textParts: string[] = [];
     let jsonRetries = 0;
@@ -52,9 +68,9 @@ export class AnthropicApiProvider implements AgentProvider {
           thinking: { type: "adaptive", display: "summarized" },
           output_config: { effort: this.config.effort },
           // If the model declines, the API retries on a fallback model within the same call.
-          ...(useFallbacks
-            ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" as const }
-            : {}),
+          ...(useFallbacks ? { fallbacks: "default" as const } : {}),
+          ...(betas.length ? { betas } : {}),
+          ...(mcpServers.length ? { mcp_servers: mcpServers } : {}),
         },
         { signal: req.signal },
       );
@@ -65,6 +81,9 @@ export class AnthropicApiProvider implements AgentProvider {
         emit({ type: "text_delta", text: delta });
       });
       stream.on("thinking", (delta) => emit({ type: "thinking_delta", text: delta }));
+      stream.on("contentBlock", (block) => {
+        if (block.type === "mcp_tool_use") emit({ type: "tool_start", tool: `github.${block.name}`, input: {} });
+      });
 
       let message: Anthropic.Beta.BetaMessage;
       try {

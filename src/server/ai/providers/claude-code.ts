@@ -2,6 +2,7 @@ import { mkdirSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createSdkMcpServer, query, tool } from "@anthropic-ai/claude-agent-sdk";
+import { GITHUB_MCP_SERVER, GITHUB_MCP_URL, GITHUB_TOOL_ALLOWLIST } from "../github-mcp";
 import type { AgentEvent, AgentProvider, AgentRunRequest, AiConfig } from "../types";
 
 const MCP_SERVER = "project";
@@ -56,8 +57,26 @@ export class ClaudeCodeProvider implements AgentProvider {
       options: {
         systemPrompt: req.systemPrompt,
         tools: [], // no Bash/Read/Write/WebFetch…: only our project tools
-        mcpServers: { [MCP_SERVER]: server },
-        allowedTools: req.tools.specs.map((s) => `mcp__${MCP_SERVER}__${s.name}`),
+        mcpServers: {
+          [MCP_SERVER]: server,
+          ...(req.github
+            ? {
+                [GITHUB_MCP_SERVER]: {
+                  type: "http" as const,
+                  url: GITHUB_MCP_URL,
+                  headers: {
+                    Authorization: `Bearer ${req.github.token}`,
+                    "X-MCP-Toolsets": "context,repos,pull_requests",
+                  },
+                },
+              }
+            : {}),
+        },
+        // dontAsk mode denies every tool not listed here, so only allowlisted GitHub tools can run.
+        allowedTools: [
+          ...req.tools.specs.map((s) => `mcp__${MCP_SERVER}__${s.name}`),
+          ...(req.github ? GITHUB_TOOL_ALLOWLIST.map((t) => `mcp__${GITHUB_MCP_SERVER}__${t}`) : []),
+        ],
         permissionMode: "dontAsk",
         settingSources: [], // ignore ~/.claude settings and CLAUDE.md files
         persistSession: false,
@@ -75,7 +94,13 @@ export class ClaudeCodeProvider implements AgentProvider {
     for await (const msg of run) {
       if (msg.type === "stream_event" && msg.parent_tool_use_id === null) {
         const event = msg.event;
-        if (event.type === "content_block_delta") {
+        if (
+          event.type === "content_block_start" &&
+          event.content_block.type === "tool_use" &&
+          event.content_block.name.startsWith(`mcp__${GITHUB_MCP_SERVER}__`)
+        ) {
+          emit({ type: "tool_start", tool: `github.${event.content_block.name.split("__").pop()}`, input: {} });
+        } else if (event.type === "content_block_delta") {
           if (event.delta.type === "text_delta") emit({ type: "text_delta", text: event.delta.text });
           else if (event.delta.type === "thinking_delta") emit({ type: "thinking_delta", text: event.delta.thinking });
         }

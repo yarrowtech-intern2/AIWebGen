@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertCircle, ArrowUp, Eye, FilePen, FileX, Loader2, Square } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
@@ -23,11 +23,13 @@ type Props = {
   onOpenFile: (path: string) => void;
   /** Mobile only: jump to the preview after Claude changes files. */
   onShowPreview?: () => void;
+  /** Controls shown above the message box (e.g. the GitHub tools switch). */
+  composerExtras?: ReactNode;
 };
 
 const isTouch = () => typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
 
-export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpenFile, onShowPreview }: Props) {
+export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpenFile, onShowPreview, composerExtras }: Props) {
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -99,6 +101,7 @@ export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpe
           submit();
         }}
       >
+        {composerExtras && <div className="mb-2 flex flex-wrap items-center gap-2">{composerExtras}</div>}
         <div className="relative">
           <Textarea
             value={input}
@@ -214,6 +217,9 @@ const TOOL_LABELS: Record<string, string> = {
   delete_file: "Deleted",
 };
 
+const toolLabel = (tool: string) =>
+  tool.startsWith("github.") ? `GitHub: ${tool.slice(7).replace(/_/g, " ")}` : (TOOL_LABELS[tool] ?? tool);
+
 function ActivityList({ items }: { items: Activity[] }) {
   return (
     <ul className="flex flex-col gap-0.5 border-l-2 pl-2.5 text-xs text-muted-foreground">
@@ -221,7 +227,7 @@ function ActivityList({ items }: { items: Activity[] }) {
         <li key={a.id} className={cn("flex items-center gap-1.5", a.error && "text-destructive")}>
           {a.error ? <FileX className="size-3 shrink-0" /> : <FilePen className="size-3 shrink-0" />}
           <span className="truncate">
-            {a.error ? `${a.tool}: ${a.error}` : `${TOOL_LABELS[a.tool] ?? a.tool}${a.path ? ` ${a.path}` : ""}`}
+            {a.error ? `${a.tool}: ${a.error}` : `${toolLabel(a.tool)}${a.path ? ` ${a.path}` : ""}`}
           </span>
         </li>
       ))}

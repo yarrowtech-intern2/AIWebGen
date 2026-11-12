@@ -1,6 +1,7 @@
 import type { SiteKit } from "@/kits/types";
 import type { ProjectFileStore } from "@/server/projects/file-store";
 import { Channel } from "./channel";
+import { GITHUB_TOOLS_PROMPT } from "./github-mcp";
 import { buildSystemPrompt, buildTurnContext } from "./prompt";
 import { AnthropicApiProvider } from "./providers/anthropic-api";
 import { ClaudeCodeProvider } from "./providers/claude-code";
@@ -35,6 +36,7 @@ export type RunTurnOptions = {
   userMessage: string;
   signal?: AbortSignal;
   config?: AiConfig;
+  github?: { token: string };
 };
 
 /**
@@ -58,12 +60,13 @@ export async function* runAgentTurn(opts: RunTurnOptions): AsyncGenerator<AgentE
   const tools = createProjectTools(opts.store, opts.kit, emit);
   const request = {
     systemPrompt: buildSystemPrompt(opts.kit),
-    turnContext: await buildTurnContext(opts.store, opts.kit),
+    turnContext: (await buildTurnContext(opts.store, opts.kit)) + (opts.github ? `\n\n${GITHUB_TOOLS_PROMPT}` : ""),
     history: opts.history,
     userMessage: opts.userMessage,
     tools,
     kit: opts.kit,
     signal,
+    github: opts.github,
   };
 
   const running = provider

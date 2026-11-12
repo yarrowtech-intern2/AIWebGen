@@ -17,6 +17,21 @@ model User {
   passwordHash String
   createdAt    DateTime  @default(now())
   projects     Project[]
+  integrations Integration[]
+}
+
+/// A connected third-party account (GitHub, Vercel). Tokens are AES-256-GCM encrypted.
+model Integration {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider       String // "github" | "vercel"
+  tokenEncrypted String
+  accountName    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([userId, provider])
 }
 
 model Project {
@@ -27,6 +42,13 @@ model Project {
   kit              String // "static" | "react-vite" | …
   templateSlug     String?
   currentVersionId String?
+  /// Let Claude use the user's GitHub tools (MCP) in this project's chat.
+  githubToolsEnabled Boolean @default(false)
+  /// Last publish settings, reused by the next Publish.
+  publishTarget    String? // "github-pages" | "vercel"
+  githubRepo       String? // "owner/name"
+  publishedUrl     String?
+  publishedAt      DateTime?
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
   files            ProjectFile[]

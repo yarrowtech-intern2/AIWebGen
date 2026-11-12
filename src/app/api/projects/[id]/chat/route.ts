@@ -4,6 +4,7 @@ import type { ChatStreamEvent } from "@/lib/chat-events";
 import { runAgentTurn } from "@/server/ai";
 import { endTurn, startTurn } from "@/server/ai/active-turns";
 import { errorResponse, HttpError, readJson, requireProject } from "@/server/http";
+import { getIntegrationToken } from "@/server/integrations/store";
 import { DbFileStore } from "@/server/projects/db-file-store";
 import { addMessage, createVersion, getChatHistory, touchProject } from "@/server/projects/service";
 
@@ -29,6 +30,7 @@ export async function POST(req: Request, ctx: RouteContext<"/api/projects/[id]/c
     const abort = controller;
 
     const history = await getChatHistory(id);
+    const github = project.githubToolsEnabled ? await getIntegrationToken(project.userId, "github") : null;
     await addMessage(id, "user", message);
 
     const encoder = new TextEncoder();
@@ -56,6 +58,7 @@ export async function POST(req: Request, ctx: RouteContext<"/api/projects/[id]/c
             history,
             userMessage: message,
             signal: abort.signal,
+            github: github ? { token: github.token } : undefined,
           })) {
             if (event.type === "text_delta") streamedText += event.text;
             else if (event.type === "file_changed") changed.add(event.path);

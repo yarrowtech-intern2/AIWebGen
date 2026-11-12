@@ -2,7 +2,7 @@
 
 An AI website builder: describe a site, and Claude builds it by editing a virtual project, then refines it as you chat. See [projectDetails.md](projectDetails.md) for the product brief and [docs/](docs/) for the architecture, roadmap and decision log.
 
-**Status:** M0–M3 are done: AI core, builder UI (chat, live preview, code editor), accounts, and version history. Next is M4 (React preview, templates, ZIP export).
+**Status:** M0–M4 are done: AI core, builder (chat, live preview for static and React, code editor, history), accounts, templates, ZIP export, and GitHub/Vercel publishing. Next is M5 (hardening).
 
 ## Requirements
 
@@ -27,6 +27,8 @@ npm run dev                 # http://localhost:3000
 3. Watch the Preview tab update as Claude writes files. Switch to Code to view or edit them (Ctrl+S saves)
 4. Keep chatting to change the site. Stop cancels a running turn
 5. The History tab lists every version; Restore brings back an earlier one (as a new version)
+6. **Publish** puts the site online on GitHub Pages or Vercel. Connect the account once with a token; the dialog walks you through creating one
+7. **GitHub on** (above the chat box) lets Claude use your GitHub: "import my repo X", "push this to a branch and open a PR"
 
 ## Try the AI agent from the terminal
 

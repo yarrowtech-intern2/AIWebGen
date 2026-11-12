@@ -30,6 +30,10 @@
 | D26 | 2026-11-12 | GitHub: a Publish button (reliable path) plus allowlisted GitHub MCP tools for Claude; token now, OAuth later; deploy to GitHub Pages or Vercel | User choice |
 | D27 | 2026-11-12 | React preview is built on our server with esbuild (in memory, cached per project); npm packages load from esm.sh through an import map. Replaces the Sandpack plan | Same sandbox and token security as static previews, no third-party bundler iframe, build errors are visible to the server (so the UI can offer "Ask Claude to fix"), and it's testable without a browser. The exported project still uses real Vite |
 | D28 | 2026-11-12 | ZIP export adds a README (run instructions) and, for React, a `.gitignore` | The download works on its own |
+| D29 | 2026-11-12 | GitHub/Vercel tokens are stored AES-256-GCM encrypted with a key derived (HKDF) from AUTH_SECRET | No extra secret to manage; rotating AUTH_SECRET means users reconnect |
+| D30 | 2026-11-12 | GitHub Pages publish: one commit that replaces the repo contents; static sites served from the branch root (`.nojekyll`), React built by a committed GitHub Actions workflow with the right `--base` | Reproducible; the repo always matches the project |
+| D31 | 2026-11-12 | Vercel publish uploads files directly through the deployments API (no Git link needed) | Works without GitHub; React projects are built by Vercel with Vite |
+| D32 | 2026-11-12 | GitHub MCP for Claude: off by default per project, allowlist of 12 tools (no delete/merge/fork), repository content treated as untrusted data; Messages API MCP connector for `anthropic-api`, HTTP MCP server for `claude-code` | Useful ("import my repo", "open a PR") with a small blast radius |
 
 ## Open questions
 

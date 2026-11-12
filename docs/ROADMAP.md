@@ -38,7 +38,7 @@ Each milestone ends with something you can run and check. Milestones are built i
 - Mobile builder: one view at a time with a bottom tab bar (Chat · Preview · Code · History); "View preview" after each change
 - Rename a project by clicking its name in the builder header
 
-### M4c: GitHub + deploy
+### M4c: GitHub + deploy ✅ (2026-11-12; built, waiting on a real GitHub/Vercel token for an end-to-end test)
 - Connect GitHub with a fine-grained personal access token (encrypted at rest); OAuth "Connect GitHub" button later
 - "Publish" button: push the project to a repo, then deploy to **GitHub Pages** or **Vercel** (user picks)
 - Claude gets an allowlisted set of GitHub MCP tools in chat (import a repo, open a PR), switched on per project

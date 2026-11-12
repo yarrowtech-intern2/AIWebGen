@@ -25,6 +25,8 @@ export type AgentRunRequest = {
   tools: ProjectTools;
   kit: SiteKit;
   signal: AbortSignal;
+  /** When set, Claude may use the user's GitHub through the GitHub MCP server. */
+  github?: { token: string };
 };
 
 export type ProviderId = "claude-code" | "anthropic-api";
