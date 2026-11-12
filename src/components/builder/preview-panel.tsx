@@ -47,7 +47,7 @@ export function PreviewPanel({ project, previewToken, files, version, onReload }
           value={currentPage}
           onChange={(e) => setPage(e.target.value)}
           aria-label="Page"
-          className="h-7 max-w-48 rounded-md border bg-background px-2 font-mono text-xs"
+          className="mr-auto h-8 max-w-48 rounded-md border bg-background px-2 font-mono text-xs md:mr-0 md:h-7"
         >
           {pages.length === 0 && <option value="index.html">index.html</option>}
           {pages.map((p) => (
@@ -57,7 +57,7 @@ export function PreviewPanel({ project, previewToken, files, version, onReload }
           ))}
         </select>
 
-        <div className="mx-auto flex items-center gap-0.5">
+        <div className="mx-auto hidden items-center gap-0.5 md:flex">
           {DEVICES.map((d) => (
             <Tooltip key={d.id}>
               <TooltipTrigger asChild>

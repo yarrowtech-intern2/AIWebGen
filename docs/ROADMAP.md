@@ -32,7 +32,18 @@ Each milestone ends with something you can run and check. Milestones are built i
 - ~~Chat history saved and replayed as context~~ (done in M2)
 - **Check:** two users can't see each other's projects; restoring v1 brings back the original files
 
-### M4: React kit, templates, export
+### M4a: Easiest flow + mobile ✅ (2026-11-12)
+- Prompt-first home: type what you want, then "Build it" creates and names the project and sends the first message
+- Template cards start a project instantly from ready-made files
+- Mobile builder: one view at a time with a bottom tab bar (Chat · Preview · Code · History); "View preview" after each change
+- Rename a project by clicking its name in the builder header
+
+### M4c: GitHub + deploy
+- Connect GitHub with a fine-grained personal access token (encrypted at rest); OAuth "Connect GitHub" button later
+- "Publish" button: push the project to a repo, then deploy to **GitHub Pages** or **Vercel** (user picks)
+- Claude gets an allowlisted set of GitHub MCP tools in chat (import a repo, open a PR), switched on per project
+
+### M4: React kit, templates, export (M4b)
 - `react-vite` kit + Sandpack preview
 - Templates: 3–4 per kit, picked in the "new project" dialog
 - ZIP export (with a run README for each kit)

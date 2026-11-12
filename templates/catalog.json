@@ -1,0 +1,18 @@
+{
+  "business-landing": {
+    "name": "Business landing page",
+    "description": "A local service business: services, process, testimonials and a contact form."
+  },
+  "portfolio": {
+    "name": "Portfolio",
+    "description": "A creative professional's portfolio: filterable gallery, packages and contact."
+  },
+  "restaurant-cafe": {
+    "name": "Restaurant / café",
+    "description": "A café or restaurant: tabbed menu with prices, story, hours and reservations."
+  },
+  "saas-product": {
+    "name": "SaaS product",
+    "description": "A software product: features, pricing tiers with billing toggle, FAQ and sign-up."
+  }
+}

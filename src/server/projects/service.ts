@@ -3,6 +3,7 @@ import { getKit } from "@/kits";
 import type { ChatTurn } from "@/server/ai/types";
 import { LIMITS, normalizeProjectPath, ToolInputError } from "@/server/ai/tools";
 import { db } from "@/server/db";
+import { loadTemplateFiles } from "./templates";
 
 // ---- Projects --------------------------------------------------------------------
 
@@ -14,20 +15,23 @@ export async function listProjects(userId: string) {
   });
 }
 
-export async function createProject(userId: string, input: { name: string; kit: string }) {
+export async function createProject(userId: string, input: { name: string; kit: string; template?: string }) {
   const kit = getKit(input.kit);
+  const templateFiles = input.template ? await loadTemplateFiles(kit.id, input.template) : null;
+  const files = templateFiles ?? kit.starterFiles;
   const project = await db.project.create({
     data: {
       userId,
       name: input.name,
       kit: kit.id,
+      templateSlug: templateFiles ? input.template : null,
       files: {
-        create: Object.entries(kit.starterFiles).map(([path, content]) => ({ path, content })),
+        create: Object.entries(files).map(([path, content]) => ({ path, content })),
       },
     },
     select: { id: true },
   });
-  await createVersion(project.id, "template", "Starter files");
+  await createVersion(project.id, "template", templateFiles ? `Template: ${input.name}` : "Starter files");
   return project;
 }
 

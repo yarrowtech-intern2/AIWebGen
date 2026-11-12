@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Copper Kettle | Neighbourhood Café &amp; Bakery, Indiranagar</title>
+  <meta name="description" content="The Copper Kettle is a cosy neighbourhood café and bakery in Indiranagar, Bengaluru. Small-batch coffee, loose-leaf teas, all-day breakfast and bakes from our oven every morning." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,100&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: { 50: '#FFFCF7', 100: '#FBF5EC', 200: '#F3E6D2', 300: '#E8D5B7' },
+            espresso: { 500: '#6B4A38', 700: '#4A2E20', 800: '#3B2418', 900: '#2A1810' },
+            copper: { 300: '#E0A877', 400: '#D08A4E', 500: '#B87333', 600: '#9A5B24', 700: '#7E4A1D' }
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Nunito', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-cream-100 text-espresso-800 font-sans antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-espresso-800 focus:text-cream-100 focus:px-4 focus:py-2 focus:rounded-full">Skip to content</a>
+
+  <!-- Header -->
+  <header id="site-header" class="sticky top-0 z-50 bg-cream-100/90 backdrop-blur border-b border-transparent transition-colors">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3 group" aria-label="The Copper Kettle, back to top">
+        <span class="w-11 h-11 rounded-full bg-espresso-800 grid place-items-center shadow-sm group-hover:rotate-[-8deg] transition-transform">
+          <svg viewBox="0 0 32 32" class="w-6 h-6" aria-hidden="true" fill="none" stroke="#E0A877" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 13h14l-1.4 10.2A3 3 0 0 1 17.6 26h-5.2a3 3 0 0 1-3-2.8L8 13Z"/>
+            <path d="M22 15c3 0 4.5 1.4 4.5 3.2S25 21 22 21"/>
+            <path d="M8 15 4.5 11.5"/>
+            <path d="M12 13a3 3 0 0 1 6 0"/>
+            <path d="M13 8c0-1.2 1-1.6 1-2.8M17 8c0-1.2 1-1.6 1-2.8"/>
+          </svg>
+        </span>
+        <span class="leading-tight">
+          <span class="block font-display text-xl font-semibold tracking-tight">The Copper Kettle</span>
+          <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-copper-600">Café &amp; Bakery</span>
+        </span>
+      </a>
+
+      <nav aria-label="Main" class="hidden md:block">
+        <ul class="flex items-center gap-8 font-semibold text-[15px]">
+          <li><a class="nav-link" href="#menu">Menu</a></li>
+          <li><a class="nav-link" href="#story">Our story</a></li>
+          <li><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li><a class="nav-link" href="#visit">Visit</a></li>
+          <li><a href="#reserve" class="btn btn-primary !py-2.5 !px-5">Reserve</a></li>
+        </ul>
+      </nav>
+
+      <button id="nav-toggle" class="md:hidden w-11 h-11 grid place-items-center rounded-full hover:bg-cream-200 focus-ring" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="w-6 h-6 icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="w-6 h-6 icon-close hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <nav id="mobile-nav" aria-label="Mobile" class="md:hidden hidden border-t border-cream-300 bg-cream-100">
+      <ul class="px-5 py-4 flex flex-col gap-1 font-semibold">
+        <li><a class="block px-3 py-3 rounded-xl hover:bg-cream-200" href="#menu">Menu</a></li>
+        <li><a class="block px-3 py-3 rounded-xl hover:bg-cream-200" href="#story">Our story</a></li>
+        <li><a class="block px-3 py-3 rounded-xl hover:bg-cream-200" href="#gallery">Gallery</a></li>
+        <li><a class="block px-3 py-3 rounded-xl hover:bg-cream-200" href="#visit">Visit</a></li>
+        <li class="pt-2"><a href="#reserve" class="btn btn-primary w-full">Reserve a table</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section id="top" class="relative overflow-hidden">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-10 pb-20 md:pt-16 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+        <div class="relative z-10">
+          <p class="inline-flex items-center gap-2 rounded-full bg-cream-200 px-4 py-1.5 text-sm font-bold text-copper-700">
+            <span class="w-2 h-2 rounded-full bg-copper-500" aria-hidden="true"></span>
+            Fresh from the oven since 7:30 am
+          </p>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.08] tracking-tight">
+            Good coffee, warm bakes &amp; a <span class="text-copper-600 italic">table for you</span>.
+          </h1>
+          <p class="mt-6 text-lg text-espresso-500 max-w-md leading-relaxed">
+            A neighbourhood café on 12th Main where the kettle's always on, the croissants are still warm and nobody rushes you out.
+          </p>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <a href="#menu" class="btn btn-primary">
+              See the menu
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4-1.4l3.3-3.3H4a1 1 0 1 1 0-2h9.6l-3.3-3.3a1 1 0 0 1 0-1.4Z" clip-rule="evenodd"/></svg>
+            </a>
+            <a href="#reserve" class="btn btn-outline">Reserve a table</a>
+          </div>
+          <dl class="mt-12 grid grid-cols-3 gap-4 max-w-md">
+            <div>
+              <dt class="text-xs font-bold uppercase tracking-wider text-espresso-500">Roasted</dt>
+              <dd class="font-display text-2xl font-semibold">Chikmagalur</dd>
+            </div>
+            <div>
+              <dt class="text-xs font-bold uppercase tracking-wider text-espresso-500">Baked</dt>
+              <dd class="font-display text-2xl font-semibold">Daily</dd>
+            </div>
+            <div>
+              <dt class="text-xs font-bold uppercase tracking-wider text-espresso-500">Rated</dt>
+              <dd class="font-display text-2xl font-semibold">4.8 ★</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -top-8 -right-10 w-72 h-72 rounded-full bg-copper-300/40 blur-3xl" aria-hidden="true"></div>
+          <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-espresso-900/20 aspect-[4/5]">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80" alt="Warm, sunlit café interior with wooden tables and hanging lights" class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-6 -left-4 sm:-left-8 bg-cream-50 rounded-3xl shadow-xl px-5 py-4 flex items-center gap-4 max-w-[260px]">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=200&q=80" alt="" class="w-14 h-14 rounded-2xl object-cover" />
+            <div>
+              <p class="font-bold text-sm">Today's special</p>
+              <p class="text-sm text-espresso-500">Cardamom buns, out at 9 am</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="bg-espresso-800 text-cream-100 py-20 md:py-28 rounded-t-[3rem]">
+      <div class="max-w-5xl mx-auto px-5 sm:px-8">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="eyebrow text-copper-300">Our menu</p>
+          <h2 class="mt-3 font-display text-4xl md:text-5xl font-semibold">Something for every kind of morning</h2>
+          <p class="mt-4 text-cream-200/80 text-lg">Beans from a single estate in Chikmagalur, leaves from Darjeeling and Assam, and everything else made in our kitchen.</p>
+        </div>
+
+        <div role="tablist" aria-label="Menu categories" class="mt-12 flex flex-wrap justify-center gap-2 sm:gap-3" id="menu-tabs">
+          <button role="tab" id="tab-coffee" aria-controls="panel-coffee" aria-selected="true" class="menu-tab">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v2M12 3v2"/></svg>
+            Coffee
+          </button>
+          <button role="tab" id="tab-tea" aria-controls="panel-tea" aria-selected="false" tabindex="-1" class="menu-tab">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h12v4a6 6 0 0 1-6 6v0a6 6 0 0 1-6-6v-4Z"/><path d="M17 12h1a2 2 0 0 1 0 4h-1.5"/><path d="M11 10V6l3-2"/></svg>
+            Tea
+          </button>
+          <button role="tab" id="tab-breakfast" aria-controls="panel-breakfast" aria-selected="false" tabindex="-1" class="menu-tab">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><circle cx="12" cy="13" r="3"/><path d="M12 2v1"/></svg>
+            Breakfast
+          </button>
+          <button role="tab" id="tab-bakes" aria-controls="panel-bakes" aria-selected="false" tabindex="-1" class="menu-tab">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14c0-4 4-7 9-7s9 3 9 7l-2 3H5l-2-3Z"/><path d="M8 8.5 9.5 17M16 8.5 14.5 17M12 7v10"/></svg>
+            Bakes
+          </button>
+        </div>
+
+        <!-- Coffee -->
+        <div role="tabpanel" id="panel-coffee" aria-labelledby="tab-coffee" tabindex="0" class="menu-panel mt-12">
+          <ul class="grid md:grid-cols-2 gap-x-12 gap-y-2">
+            <li class="menu-item"><div><h3>Espresso</h3><p>A double shot of our house Chikmagalur blend: dark chocolate, toasted hazelnut.</p></div><span class="price">₹140</span></li>
+            <li class="menu-item"><div><h3>Copper Kettle Cappuccino <span class="tag">House fav</span></h3><p>Velvety foam, a dusting of cocoa, served in our signature copper-rimmed cup.</p></div><span class="price">₹190</span></li>
+            <li class="menu-item"><div><h3>Flat White</h3><p>Ristretto shots with silky steamed milk. Strong, smooth and small.</p></div><span class="price">₹210</span></li>
+            <li class="menu-item"><div><h3>Filter Kaapi</h3><p>Brewed the Bengaluru way with 20% chicory, frothed high between dabarah and tumbler.</p></div><span class="price">₹120</span></li>
+            <li class="menu-item"><div><h3>Cold Brew Tonic</h3><p>18-hour cold brew over tonic and ice with a twist of orange peel.</p></div><span class="price">₹240</span></li>
+            <li class="menu-item"><div><h3>Honey Cinnamon Latte</h3><p>Wild forest honey and freshly ground cinnamon, hot or iced.</p></div><span class="price">₹230</span></li>
+          </ul>
+        </div>
+
+        <!-- Tea -->
+        <div role="tabpanel" id="panel-tea" aria-labelledby="tab-tea" tabindex="0" class="menu-panel mt-12" hidden>
+          <ul class="grid md:grid-cols-2 gap-x-12 gap-y-2">
+            <li class="menu-item"><div><h3>Masala Chai <span class="tag">House fav</span></h3><p>Assam CTC simmered with ginger, cardamom, clove and our own spice mix.</p></div><span class="price">₹110</span></li>
+            <li class="menu-item"><div><h3>Darjeeling First Flush</h3><p>Light, floral and muscatel. Served in a pot for one with a timer.</p></div><span class="price">₹180</span></li>
+            <li class="menu-item"><div><h3>Kashmiri Kahwa</h3><p>Green tea with saffron, almond slivers and cinnamon. Warming and golden.</p></div><span class="price">₹170</span></li>
+            <li class="menu-item"><div><h3>Earl Grey Crème</h3><p>Black tea with bergamot and vanilla, with milk or a slice of lemon.</p></div><span class="price">₹160</span></li>
+            <li class="menu-item"><div><h3>Chamomile &amp; Honey</h3><p>Whole chamomile flowers steeped with a spoon of wild honey. Caffeine-free.</p></div><span class="price">₹160</span></li>
+            <li class="menu-item"><div><h3>Iced Lemon Mint Tea</h3><p>Cold-steeped black tea shaken with fresh mint, lemon and a touch of jaggery.</p></div><span class="price">₹150</span></li>
+          </ul>
+        </div>
+
+        <!-- Breakfast -->
+        <div role="tabpanel" id="panel-breakfast" aria-labelledby="tab-breakfast" tabindex="0" class="menu-panel mt-12" hidden>
+          <ul class="grid md:grid-cols-2 gap-x-12 gap-y-2">
+            <li class="menu-item"><div><h3>Akuri on Toast</h3><p>Soft Parsi-style spiced scrambled eggs on buttered house sourdough.</p></div><span class="price">₹280</span></li>
+            <li class="menu-item"><div><h3>Smashed Avocado Sourdough</h3><p>Lime, chilli flakes, feta and pickled onion. Add a poached egg for ₹50.</p></div><span class="price">₹340</span></li>
+            <li class="menu-item"><div><h3>Buttermilk Pancakes</h3><p>A stack of three with salted caramel bananas and whipped cream.</p></div><span class="price">₹310</span></li>
+            <li class="menu-item"><div><h3>The Full Kettle <span class="tag">Hearty</span></h3><p>Eggs your way, chicken sausages, hash browns, sautéed mushrooms, beans and toast.</p></div><span class="price">₹420</span></li>
+            <li class="menu-item"><div><h3>Granola Bowl</h3><p>House-toasted oat and ragi granola, hung curd, seasonal fruit and honey.</p></div><span class="price">₹260</span></li>
+            <li class="menu-item"><div><h3>Mushroom &amp; Cheese Omelette</h3><p>Three eggs, button mushrooms, aged cheddar and chives, with toast.</p></div><span class="price">₹290</span></li>
+          </ul>
+        </div>
+
+        <!-- Bakes -->
+        <div role="tabpanel" id="panel-bakes" aria-labelledby="tab-bakes" tabindex="0" class="menu-panel mt-12" hidden>
+          <ul class="grid md:grid-cols-2 gap-x-12 gap-y-2">
+            <li class="menu-item"><div><h3>Butter Croissant</h3><p>Laminated over three days with French-style butter. Shatteringly flaky.</p></div><span class="price">₹150</span></li>
+            <li class="menu-item"><div><h3>Cardamom Bun <span class="tag">House fav</span></h3><p>Swedish-style knotted bun with Kerala cardamom sugar. Out at 9 am, gone by 11.</p></div><span class="price">₹130</span></li>
+            <li class="menu-item"><div><h3>Banana Walnut Bread</h3><p>Thick slice, served warm with a curl of salted butter.</p></div><span class="price">₹160</span></li>
+            <li class="menu-item"><div><h3>Dark Chocolate Brownie</h3><p>Fudgy, made with 70% single-origin cocoa from Idukki.</p></div><span class="price">₹170</span></li>
+            <li class="menu-item"><div><h3>Lemon Drizzle Slice</h3><p>Zesty sponge soaked in lemon syrup with a crackly sugar top.</p></div><span class="price">₹160</span></li>
+            <li class="menu-item"><div><h3>Seasonal Fruit Tart</h3><p>Crisp butter pastry, vanilla custard and whatever's best at the market this week.</p></div><span class="price">₹220</span></li>
+          </ul>
+        </div>
+
+        <p class="mt-10 text-center text-sm text-cream-200/70">Prices inclusive of GST. Oat and almond milk available for ₹40. Please tell us about any allergies.</p>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section id="story" class="py-20 md:py-28">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="relative order-2 md:order-1">
+          <div class="grid grid-cols-2 gap-4">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Freshly baked loaves of bread on a wooden board" class="rounded-[2rem] aspect-[3/4] object-cover w-full mt-10" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="Barista pouring latte art into a coffee cup" class="rounded-[2rem] aspect-[3/4] object-cover w-full" loading="lazy" />
+          </div>
+          <div class="absolute -bottom-6 right-6 bg-copper-600 text-cream-50 rounded-full w-28 h-28 grid place-items-center text-center shadow-xl rotate-[-8deg]">
+            <span class="leading-tight"><span class="block text-xs font-bold uppercase tracking-wider">Since</span><span class="block font-display text-3xl font-semibold">2016</span></span>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <p class="eyebrow text-copper-600">Our story</p>
+          <h2 class="mt-3 font-display text-4xl md:text-5xl font-semibold leading-tight">It started with one copper kettle and a borrowed oven</h2>
+          <div class="mt-6 space-y-4 text-lg text-espresso-500 leading-relaxed">
+            <p>Meera and Arjun opened The Copper Kettle in 2016 with eight chairs, her grandmother's copper kettle and a secondhand oven that only worked if you jammed the door shut with a wooden spoon.</p>
+            <p>Ten years on, the oven has been replaced, but the idea hasn't: honest coffee from growers we know by name, bread made slowly by hand, and a room where neighbours become regulars and regulars become friends.</p>
+          </div>
+          <ul class="mt-8 grid sm:grid-cols-3 gap-4">
+            <li class="rounded-2xl bg-cream-50 border border-cream-300 p-4">
+              <p class="font-display text-xl font-semibold">Small batch</p>
+              <p class="text-sm text-espresso-500 mt-1">Roasted weekly in Chikmagalur</p>
+            </li>
+            <li class="rounded-2xl bg-cream-50 border border-cream-300 p-4">
+              <p class="font-display text-xl font-semibold">Slow dough</p>
+              <p class="text-sm text-espresso-500 mt-1">48-hour fermented sourdough</p>
+            </li>
+            <li class="rounded-2xl bg-cream-50 border border-cream-300 p-4">
+              <p class="font-display text-xl font-semibold">Zero waste</p>
+              <p class="text-sm text-espresso-500 mt-1">Day-old bakes go to local shelters</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="pb-20 md:pb-28">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="eyebrow text-copper-600">Gallery</p>
+            <h2 class="mt-3 font-display text-4xl md:text-5xl font-semibold">A peek inside</h2>
+          </div>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="font-bold text-copper-600 hover:text-copper-700 underline-offset-4 hover:underline focus-ring rounded">More on Instagram →</a>
+        </div>
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          <figure class="gallery-item md:row-span-2">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80" alt="Cosy café corner with armchairs and plants" loading="lazy" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Cup of black coffee on a rustic table" loading="lazy" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=600&q=80" alt="Selection of cakes and pastries on display" loading="lazy" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80" alt="Latte with heart-shaped latte art seen from above" loading="lazy" />
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Coffee being poured into a white cup" loading="lazy" />
+          </figure>
+          <figure class="gallery-item col-span-2 md:col-span-3 !aspect-[21/9]">
+            <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1400&q=80" alt="Café seating area with wooden tables in soft afternoon light" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visit -->
+    <section id="visit" class="bg-cream-200 py-20 md:py-28">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12">
+        <div>
+          <p class="eyebrow text-copper-600">Visit us</p>
+          <h2 class="mt-3 font-display text-4xl md:text-5xl font-semibold">Opening hours</h2>
+          <div class="mt-8 rounded-3xl bg-cream-50 shadow-sm overflow-hidden">
+            <table class="w-full text-left" id="hours-table">
+              <caption class="sr-only">Opening hours by day of the week</caption>
+              <thead class="sr-only"><tr><th scope="col">Day</th><th scope="col">Hours</th></tr></thead>
+              <tbody class="divide-y divide-cream-300">
+                <tr data-day="1"><th scope="row">Monday</th><td>7:30 am – 9:00 pm</td></tr>
+                <tr data-day="2"><th scope="row">Tuesday</th><td>7:30 am – 9:00 pm</td></tr>
+                <tr data-day="3"><th scope="row">Wednesday</th><td>7:30 am – 9:00 pm</td></tr>
+                <tr data-day="4"><th scope="row">Thursday</th><td>7:30 am – 9:00 pm</td></tr>
+                <tr data-day="5"><th scope="row">Friday</th><td>7:30 am – 10:00 pm</td></tr>
+                <tr data-day="6"><th scope="row">Saturday</th><td>8:00 am – 10:00 pm</td></tr>
+                <tr data-day="0"><th scope="row">Sunday</th><td>8:00 am – 8:00 pm</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-4 text-sm text-espresso-500">Kitchen closes 30 minutes before we do. Breakfast is served all day.</p>
+        </div>
+
+        <div class="flex flex-col">
+          <h2 class="font-display text-3xl font-semibold lg:mt-[4.25rem]">Find us</h2>
+          <div class="mt-6 rounded-3xl bg-espresso-800 text-cream-100 p-8 flex-1 flex flex-col">
+            <address class="not-italic space-y-5">
+              <div class="flex gap-4">
+                <svg class="w-6 h-6 shrink-0 text-copper-300 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                <p class="text-lg leading-relaxed">14, 12th Main Road, HAL 2nd Stage<br />Indiranagar, Bengaluru 560038</p>
+              </div>
+              <div class="flex gap-4">
+                <svg class="w-6 h-6 shrink-0 text-copper-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+                <a href="tel:+918041234567" class="text-lg hover:text-copper-300 focus-ring rounded">+91 80 4123 4567</a>
+              </div>
+              <div class="flex gap-4">
+                <svg class="w-6 h-6 shrink-0 text-copper-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18h16M6 18V9l6-4 6 4v9"/><path d="M10 18v-5h4v5"/></svg>
+                <p class="text-lg">Two minutes' walk from Indiranagar Metro</p>
+              </div>
+            </address>
+            <p class="mt-6 text-cream-200/75">Free parking on 12th Main after 7 pm. Step-free entrance, and dogs are welcome on the patio.</p>
+            <div class="mt-auto pt-8">
+              <a href="https://www.google.com/maps/search/?api=1&query=12th+Main+Road+Indiranagar+Bengaluru+560038" target="_blank" rel="noopener" class="btn btn-copper">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-8-8 18-2-8-8-2Z"/></svg>
+                Get directions
+                <span class="sr-only">(opens Google Maps in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservation -->
+    <section id="reserve" class="py-20 md:py-28">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-5 gap-12 items-start">
+        <div class="lg:col-span-2">
+          <p class="eyebrow text-copper-600">Reservations</p>
+          <h2 class="mt-3 font-display text-4xl md:text-5xl font-semibold leading-tight">Save yourself a seat</h2>
+          <p class="mt-5 text-lg text-espresso-500 leading-relaxed">Weekends get busy, especially Sunday brunch. Book a table and we'll call to confirm within the hour. Walk-ins are always welcome too.</p>
+          <ul class="mt-8 space-y-3 text-espresso-700">
+            <li class="flex gap-3"><span class="check" aria-hidden="true">✓</span>Tables held for 15 minutes</li>
+            <li class="flex gap-3"><span class="check" aria-hidden="true">✓</span>Groups of 9+? Call us on +91 80 4123 4567</li>
+            <li class="flex gap-3"><span class="check" aria-hidden="true">✓</span>Birthday? Tell us and we'll bring a candle</li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-3 rounded-[2rem] bg-cream-50 border border-cream-300 shadow-xl shadow-espresso-900/5 p-6 sm:p-10">
+          <form id="reserve-form" novalidate class="grid sm:grid-cols-2 gap-5">
+            <div class="sm:col-span-2">
+              <label for="name" class="field-label">Full name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required class="field" placeholder="e.g. Priya Sharma" aria-describedby="name-error" />
+              <p id="name-error" class="field-error" hidden>Please tell us your name.</p>
+            </div>
+            <div class="sm:col-span-2">
+              <label for="phone" class="field-label">Phone number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required class="field" placeholder="98765 43210" aria-describedby="phone-hint phone-error" />
+              <p id="phone-hint" class="text-sm text-espresso-500 mt-1.5">We'll call this number to confirm.</p>
+              <p id="phone-error" class="field-error" hidden>Please enter a valid 10-digit mobile number.</p>
+            </div>
+            <div>
+              <label for="date" class="field-label">Date</label>
+              <input id="date" name="date" type="date" required class="field" aria-describedby="date-error" />
+              <p id="date-error" class="field-error" hidden>Please choose today or a later date.</p>
+            </div>
+            <div>
+              <label for="time" class="field-label">Time</label>
+              <select id="time" name="time" required class="field" aria-describedby="time-error">
+                <option value="">Select a time</option>
+              </select>
+              <p id="time-error" class="field-error" hidden>Please pick a time.</p>
+            </div>
+            <div class="sm:col-span-2">
+              <label for="guests" class="field-label">Guests</label>
+              <select id="guests" name="guests" required class="field">
+                <option value="1">1 guest</option>
+                <option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6 guests</option>
+                <option value="7">7 guests</option>
+                <option value="8">8 guests</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2 pt-2">
+              <button type="submit" class="btn btn-primary w-full sm:w-auto">Request reservation</button>
+            </div>
+            <div id="form-status" class="sm:col-span-2" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-espresso-900 text-cream-200 rounded-t-[3rem]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 grid gap-10 md:grid-cols-3">
+      <div>
+        <p class="font-display text-2xl font-semibold text-cream-50">The Copper Kettle</p>
+        <p class="mt-3 text-cream-200/75 max-w-xs">Neighbourhood café &amp; bakery in Indiranagar. Pull up a chair, the kettle's on.</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="font-bold text-cream-50">Explore</p>
+        <ul class="mt-3 grid grid-cols-2 gap-2 text-cream-200/80">
+          <li><a href="#menu" class="footer-link">Menu</a></li>
+          <li><a href="#story" class="footer-link">Our story</a></li>
+          <li><a href="#gallery" class="footer-link">Gallery</a></li>
+          <li><a href="#visit" class="footer-link">Hours &amp; location</a></li>
+          <li><a href="#reserve" class="footer-link">Reservations</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="font-bold text-cream-50">Follow along</p>
+        <ul class="mt-4 flex gap-3">
+          <li>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social" aria-label="Instagram">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="social" aria-label="Facebook">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8.5c0-.3.2-.5.5-.5Z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/918041234567" target="_blank" rel="noopener" class="social" aria-label="WhatsApp">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19l-4 1Z"/><path d="M9 9.5c.3 2 2.5 4.2 4.5 4.5l1-1 1.8.8c-.3 1-1 1.7-2 1.7-3 0-6.3-3.3-6.3-6.3 0-1 .7-1.7 1.7-2l.8 1.8-1 .5Z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.google.com/maps/search/?api=1&query=12th+Main+Road+Indiranagar+Bengaluru+560038" target="_blank" rel="noopener" class="social" aria-label="Google Maps">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            </a>
+          </li>
+        </ul>
+        <p class="mt-6 text-sm text-cream-200/70">hello@thecopperkettle.in</p>
+      </div>
+    </div>
+    <div class="border-t border-cream-100/10">
+      <p class="max-w-6xl mx-auto px-5 sm:px-8 py-6 text-sm text-cream-200/60">© <span id="year">2026</span> The Copper Kettle Café &amp; Bakery. Baked with love in Bengaluru.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

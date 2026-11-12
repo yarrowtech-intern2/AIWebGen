@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, ArrowUp, FilePen, FileX, Loader2, Square } from "lucide-react";
+import { AlertCircle, ArrowUp, Eye, FilePen, FileX, Loader2, Square } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,9 +21,13 @@ type Props = {
   onSend: (text: string) => void;
   onStop: () => void;
   onOpenFile: (path: string) => void;
+  /** Mobile only: jump to the preview after Claude changes files. */
+  onShowPreview?: () => void;
 };
 
-export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpenFile }: Props) {
+const isTouch = () => typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+
+export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpenFile, onShowPreview }: Props) {
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -80,7 +84,7 @@ export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpe
                     {m.text}
                   </div>
                 ) : (
-                  <AssistantMessage message={m} onOpenFile={onOpenFile} />
+                  <AssistantMessage message={m} onOpenFile={onOpenFile} onShowPreview={onShowPreview} />
                 )}
               </li>
             ))}
@@ -100,7 +104,8 @@ export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpe
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+              // On touch keyboards Enter adds a new line; send with the button.
+              if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing && !isTouch()) {
                 e.preventDefault();
                 submit();
               }
@@ -127,13 +132,21 @@ export function ChatPanel({ messages, running, busyOnLoad, onSend, onStop, onOpe
             </Button>
           )}
         </div>
-        <p className="mt-1.5 text-[11px] text-muted-foreground">Enter to send · Shift+Enter for a new line</p>
+        <p className="mt-1.5 hidden text-[11px] text-muted-foreground md:block">Enter to send · Shift+Enter for a new line</p>
       </form>
     </div>
   );
 }
 
-function AssistantMessage({ message: m, onOpenFile }: { message: BuilderMessage; onOpenFile: (p: string) => void }) {
+function AssistantMessage({
+  message: m,
+  onOpenFile,
+  onShowPreview,
+}: {
+  message: BuilderMessage;
+  onOpenFile: (p: string) => void;
+  onShowPreview?: () => void;
+}) {
   return (
     <div className="flex w-full max-w-[95%] flex-col gap-2 text-sm">
       {m.activity.length > 0 && <ActivityList items={m.activity} />}
@@ -170,6 +183,12 @@ function AssistantMessage({ message: m, onOpenFile }: { message: BuilderMessage;
             </button>
           ))}
         </div>
+      )}
+
+      {!m.streaming && onShowPreview && m.changedFiles.length > 0 && (
+        <Button size="sm" className="self-start" onClick={onShowPreview}>
+          <Eye /> View preview
+        </Button>
       )}
 
       {!m.streaming && (m.usage || m.versionNumber) && (

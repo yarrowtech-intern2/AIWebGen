@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aarav Mehta — Wedding &amp; Portrait Photographer</title>
+  <meta name="description" content="Aarav Mehta is a Mumbai-based wedding and portrait photographer creating quiet, honest, editorial images across India and beyond." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FAF8F4',
+            linen: '#F1ECE3',
+            ink: '#1A1917',
+            muted: '#5E5A53',
+            gold: { DEFAULT: '#B08D57', dark: '#86683A', light: '#D9C49C' }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          },
+          letterSpacing: { widest2: '0.3em' }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Header -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+      <a href="#top" class="font-serif text-2xl tracking-wide header-text">Aarav Mehta</a>
+
+      <nav aria-label="Primary" class="hidden md:block">
+        <ul class="flex items-center gap-9 text-xs uppercase tracking-[0.22em] header-text">
+          <li><a href="#work" class="nav-link">Work</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#packages" class="nav-link">Packages</a></li>
+          <li><a href="#kind-words" class="nav-link">Kind words</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button id="menu-toggle" type="button" class="md:hidden header-text p-2 -mr-2" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+          <path class="icon-open" stroke-linecap="round" d="M4 8h16M4 16h16" />
+          <path class="icon-close hidden" stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <nav id="mobile-menu" aria-label="Mobile" class="hidden md:hidden border-t border-ink/10 bg-paper">
+      <ul class="flex flex-col px-6 py-4 text-sm uppercase tracking-[0.2em] text-ink">
+        <li><a href="#work" class="block py-3">Work</a></li>
+        <li><a href="#about" class="block py-3">About</a></li>
+        <li><a href="#packages" class="block py-3">Packages</a></li>
+        <li><a href="#kind-words" class="block py-3">Kind words</a></li>
+        <li><a href="#contact" class="block py-3">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <section id="top" class="relative flex min-h-[100svh] items-end overflow-hidden bg-ink text-paper">
+      <img
+        src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80"
+        alt="A bride and groom embracing in soft evening light"
+        class="absolute inset-0 h-full w-full object-cover opacity-80 hero-img" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/30" aria-hidden="true"></div>
+
+      <div class="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-40 lg:px-10 lg:pb-28">
+        <p class="mb-6 flex items-center gap-4 text-xs uppercase tracking-widest2 text-gold-light">
+          <span class="h-px w-10 bg-gold-light" aria-hidden="true"></span>
+          Wedding &amp; Portrait Photographer · Mumbai
+        </p>
+        <h1 class="font-serif text-6xl font-normal leading-[0.95] sm:text-7xl lg:text-[8.5rem]">
+          Aarav <em class="italic text-gold-light">Mehta</em>
+        </h1>
+        <p class="mt-6 max-w-xl font-serif text-xl italic leading-relaxed text-paper/90 sm:text-2xl">
+          Quiet, honest photographs of the people and moments you’ll want to remember long after the music fades.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="#work" class="btn btn-light">View work</a>
+          <a href="#contact" class="btn btn-outline-light">Book a shoot</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="work" class="py-24 lg:py-32" aria-labelledby="work-title">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2 id="work-title" class="section-title">Stories in frame</h2>
+          </div>
+          <div class="flex flex-wrap gap-2" role="group" aria-label="Filter gallery by category">
+            <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-btn" data-filter="weddings" aria-pressed="false">Weddings</button>
+            <button type="button" class="filter-btn" data-filter="portraits" aria-pressed="false">Portraits</button>
+            <button type="button" class="filter-btn" data-filter="events" aria-pressed="false">Events</button>
+          </div>
+        </div>
+
+        <p id="gallery-status" class="sr-only" aria-live="polite"></p>
+
+        <ul id="gallery" class="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <li class="gallery-item" data-category="weddings">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Newlyweds walking hand in hand outdoors" /></div>
+              <figcaption><span>Ishita &amp; Kabir</span><span class="cat">Weddings · Udaipur</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="portraits">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Smiling woman in natural window light" /></div>
+              <figcaption><span>Meera, at home</span><span class="cat">Portraits · Bandra</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="events">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="Guests dancing under warm lights and confetti" /></div>
+              <figcaption><span>The Kapoor Sangeet</span><span class="cat">Events · Delhi</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="weddings">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=900&q=80" alt="Wedding couple sharing a quiet moment" /></div>
+              <figcaption><span>Ananya &amp; Rohan</span><span class="cat">Weddings · Goa</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="portraits">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80" alt="Close-up portrait of a man with a gentle smile" /></div>
+              <figcaption><span>Vikram</span><span class="cat">Portraits · Studio</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="events">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=80" alt="Festive celebration table with balloons and decorations" /></div>
+              <figcaption><span>Aanya turns one</span><span class="cat">Events · Pune</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="weddings">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80" alt="Bride and groom posing together on their wedding day" /></div>
+              <figcaption><span>Sana &amp; Arjun</span><span class="cat">Weddings · Jaipur</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="portraits">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=80" alt="Portrait of a woman with soft natural light on her face" /></div>
+              <figcaption><span>Riya</span><span class="cat">Portraits · Colaba</span></figcaption>
+            </figure>
+          </li>
+          <li class="gallery-item" data-category="events">
+            <figure>
+              <div class="gallery-frame"><img loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=80" alt="Friends raising glasses at an evening celebration" /></div>
+              <figcaption><span>Thirty years, together</span><span class="cat">Events · Alibaug</span></figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="bg-linen py-24 lg:py-32" aria-labelledby="about-title">
+      <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-12 lg:gap-20 lg:px-10">
+        <div class="relative lg:col-span-5">
+          <div class="absolute -left-4 -top-4 h-full w-full border border-gold/60" aria-hidden="true"></div>
+          <img
+            src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1000&q=80"
+            alt="Aarav Mehta holding his camera"
+            loading="lazy"
+            class="relative aspect-[4/5] w-full object-cover" />
+        </div>
+        <div class="lg:col-span-7">
+          <p class="eyebrow">About</p>
+          <h2 id="about-title" class="section-title">Hello, I’m Aarav.</h2>
+          <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-muted">
+            <p>
+              I picked up my grandfather’s old film camera at fourteen and spent a summer photographing my family on the terrace of our home in Nashik. Those slightly blurry, sun-washed prints are still the most precious things I own — and they taught me that the best photographs aren’t perfect, they’re true.
+            </p>
+            <p>
+              Ten years and more than 180 weddings later, that’s still how I work. I stay close but unobtrusive, guiding gently when it helps and stepping back when it doesn’t. The result is a collection that feels like your day actually felt: the nervous laughter before the pheras, your nani’s tears, the friend who danced through every song.
+            </p>
+            <p>
+              Based in Mumbai, I photograph weddings across India and travel internationally a few times a year.
+            </p>
+          </div>
+          <dl class="mt-12 grid grid-cols-3 gap-6 border-t border-ink/15 pt-8">
+            <div>
+              <dt class="text-xs uppercase tracking-[0.2em] text-muted">Years</dt>
+              <dd class="mt-2 font-serif text-4xl">10+</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-[0.2em] text-muted">Weddings</dt>
+              <dd class="mt-2 font-serif text-4xl">180</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-[0.2em] text-muted">Cities</dt>
+              <dd class="mt-2 font-serif text-4xl">34</dd>
+            </div>
+          </dl>
+          <p class="mt-10 font-serif text-3xl italic text-gold-dark">— Aarav</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Packages -->
+    <section id="packages" class="py-24 lg:py-32" aria-labelledby="packages-title">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow justify-center">Packages</p>
+          <h2 id="packages-title" class="section-title">Ways to work together</h2>
+          <p class="mt-6 text-muted leading-relaxed">Every package includes a pre-shoot consultation, careful hand-editing and a private online gallery to share with family. Travel within Mumbai is included; outstation travel is billed at cost.</p>
+        </div>
+
+        <div class="mt-16 grid gap-6 lg:grid-cols-3 lg:gap-8">
+          <!-- Tier 1 -->
+          <article class="package-card">
+            <h3 class="font-serif text-3xl">Portrait</h3>
+            <p class="mt-2 text-sm text-muted">Individuals, couples &amp; families</p>
+            <p class="mt-8 flex items-baseline gap-2">
+              <span class="font-serif text-5xl">₹35,000</span>
+            </p>
+            <ul class="package-list">
+              <li>2-hour session at one location</li>
+              <li>Styling &amp; location guidance</li>
+              <li>40 hand-edited high-resolution images</li>
+              <li>Private online gallery</li>
+              <li>Delivery within 2 weeks</li>
+            </ul>
+            <a href="#contact" data-package="Portrait" class="btn btn-outline-dark mt-auto w-full">Enquire</a>
+          </article>
+
+          <!-- Tier 2 -->
+          <article class="package-card package-featured">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold px-4 py-1 text-[0.65rem] font-medium uppercase tracking-[0.25em] text-white">Most booked</span>
+            <h3 class="font-serif text-3xl">The Wedding Day</h3>
+            <p class="mt-2 text-sm text-paper/70">One day, start to finish</p>
+            <p class="mt-8 flex items-baseline gap-2">
+              <span class="font-serif text-5xl">₹1,85,000</span>
+            </p>
+            <ul class="package-list">
+              <li>Up to 10 hours of coverage</li>
+              <li>Lead photographer + one associate</li>
+              <li>Pre-wedding consultation &amp; timeline planning</li>
+              <li>500+ hand-edited images</li>
+              <li>Short couple portrait session on the day</li>
+              <li>Private gallery &amp; delivery within 6 weeks</li>
+            </ul>
+            <a href="#contact" data-package="The Wedding Day" class="btn btn-gold mt-auto w-full">Enquire</a>
+          </article>
+
+          <!-- Tier 3 -->
+          <article class="package-card">
+            <h3 class="font-serif text-3xl">The Celebration</h3>
+            <p class="mt-2 text-sm text-muted">Multi-day weddings</p>
+            <p class="mt-8 flex items-baseline gap-2">
+              <span class="font-serif text-5xl">₹3,50,000</span>
+            </p>
+            <ul class="package-list">
+              <li>3 days of coverage — mehendi, sangeet &amp; wedding</li>
+              <li>Lead photographer + two associates</li>
+              <li>Pre-wedding shoot at a location of your choice</li>
+              <li>1,200+ hand-edited images</li>
+              <li>40-page lay-flat linen heirloom album</li>
+              <li>Sneak peek within 72 hours</li>
+            </ul>
+            <a href="#contact" data-package="The Celebration" class="btn btn-outline-dark mt-auto w-full">Enquire</a>
+          </article>
+        </div>
+        <p class="mt-10 text-center text-sm text-muted">Prices exclude GST. Custom collections and destination weddings quoted on request.</p>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="kind-words" class="bg-ink py-24 text-paper lg:py-32" aria-labelledby="testimonials-title">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <div class="text-center">
+          <p class="eyebrow eyebrow-light justify-center">Kind words</p>
+          <h2 id="testimonials-title" class="section-title">From the people in the photographs</h2>
+        </div>
+
+        <div class="mt-16 grid gap-12 md:grid-cols-3 md:gap-10">
+          <figure class="testimonial">
+            <svg class="h-8 w-8 text-gold" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M9.3 24c-2.6 0-4.3-2-4.3-4.9C5 14 8.6 9.6 13.4 8l.9 1.6c-3 1.3-4.9 3.6-5.2 6.1.3-.1.7-.1 1-.1 2.3 0 3.9 1.6 3.9 3.9 0 2.6-2 4.5-4.7 4.5zm13.5 0c-2.6 0-4.3-2-4.3-4.9 0-5.1 3.6-9.5 8.4-11.1l.9 1.6c-3 1.3-4.9 3.6-5.2 6.1.3-.1.7-.1 1-.1 2.3 0 3.9 1.6 3.9 3.9 0 2.6-2 4.5-4.7 4.5z"/></svg>
+            <blockquote class="mt-6 font-serif text-2xl leading-snug">
+              “We barely noticed Aarav was there — and then the gallery arrived and he’d caught everything. My father’s speech, my sister sneaking jalebis. We cried for an hour.”
+            </blockquote>
+            <figcaption class="mt-8 text-xs uppercase tracking-[0.22em] text-paper/70">Ishita &amp; Kabir · Udaipur</figcaption>
+          </figure>
+
+          <figure class="testimonial">
+            <svg class="h-8 w-8 text-gold" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M9.3 24c-2.6 0-4.3-2-4.3-4.9C5 14 8.6 9.6 13.4 8l.9 1.6c-3 1.3-4.9 3.6-5.2 6.1.3-.1.7-.1 1-.1 2.3 0 3.9 1.6 3.9 3.9 0 2.6-2 4.5-4.7 4.5zm13.5 0c-2.6 0-4.3-2-4.3-4.9 0-5.1 3.6-9.5 8.4-11.1l.9 1.6c-3 1.3-4.9 3.6-5.2 6.1.3-.1.7-.1 1-.1 2.3 0 3.9 1.6 3.9 3.9 0 2.6-2 4.5-4.7 4.5z"/></svg>
+            <blockquote class="mt-6 font-serif text-2xl leading-snug">
+              “I hate being photographed. Aarav made it feel like a long chat over chai, and these are the first portraits of myself I’ve actually framed.”
+            </blockquote>
+            <figcaption class="mt-8 text-xs uppercase tracking-[0.22em] text-paper/70">Meera Iyer · Portrait session</figcaption>
+          </figure>
+
+          <figure class="testimonial">
+            <svg class="h-8 w-8 text-gold" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M9.3 24c-2.6 0-4.3-2-4.3-4.9C5 14 8.6 9.6 13.4 8l.9 1.6c-3 1.3-4.9 3.6-5.2 6.1.3-.1.7-.1 1-.1 2.3 0 3.9 1.6 3.9 3.9 0 2.6-2 4.5-4.7 4.5zm13.5 0c-2.6 0-4.3-2-4.3-4.9 0-5.1 3.6-9.5 8.4-11.1l.9 1.6c-3 1.3-4.9 3.6-5.2 6.1.3-.1.7-.1 1-.1 2.3 0 3.9 1.6 3.9 3.9 0 2.6-2 4.5-4.7 4.5z"/></svg>
+            <blockquote class="mt-6 font-serif text-2xl leading-snug">
+              “Three days, four hundred guests, endless chaos — and not a single moment missed. The album is the most beautiful object in our home.”
+            </blockquote>
+            <figcaption class="mt-8 text-xs uppercase tracking-[0.22em] text-paper/70">Sana &amp; Arjun · Jaipur</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 lg:py-32" aria-labelledby="contact-title">
+      <div class="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-12 lg:px-10">
+        <div class="lg:col-span-5">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title" class="section-title">Let’s make something to keep.</h2>
+          <p class="mt-6 leading-relaxed text-muted">
+            I take on a limited number of weddings each season so every couple gets my full attention. Tell me a little about your plans and I’ll reply within two working days.
+          </p>
+
+          <ul class="mt-12 space-y-6">
+            <li class="flex items-start gap-4">
+              <svg class="mt-1 h-5 w-5 flex-none text-gold-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg>
+              <div>
+                <p class="text-xs uppercase tracking-[0.22em] text-muted">Email</p>
+                <a href="mailto:hello@aaravmehta.studio" class="text-link mt-1 inline-block font-serif text-2xl">hello@aaravmehta.studio</a>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <svg class="mt-1 h-5 w-5 flex-none text-gold-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.75" fill="currentColor"/></svg>
+              <div>
+                <p class="text-xs uppercase tracking-[0.22em] text-muted">Instagram</p>
+                <a href="https://www.instagram.com/aaravmehta.studio" target="_blank" rel="noopener" class="text-link mt-1 inline-block font-serif text-2xl">@aaravmehta.studio</a>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <svg class="mt-1 h-5 w-5 flex-none text-gold-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0112 2.5a7 7 0 017 7C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <div>
+                <p class="text-xs uppercase tracking-[0.22em] text-muted">Studio</p>
+                <p class="mt-1 font-serif text-2xl">Bandra West, Mumbai</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-7">
+          <form id="enquiry-form" class="border border-ink/10 bg-white/60 p-6 sm:p-10" novalidate>
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div class="field">
+                <label for="name">Your name(s)</label>
+                <input id="name" name="name" type="text" autocomplete="name" required placeholder="Ananya &amp; Rohan" />
+                <p class="field-error" id="name-error"></p>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+                <p class="field-error" id="email-error"></p>
+              </div>
+              <div class="field">
+                <label for="phone">Phone <span class="normal-case tracking-normal text-muted">(optional)</span></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 98XXX XXXXX" />
+              </div>
+              <div class="field">
+                <label for="date">Event date</label>
+                <input id="date" name="date" type="date" />
+              </div>
+              <div class="field sm:col-span-2">
+                <label for="package">Interested in</label>
+                <select id="package" name="package">
+                  <option value="">Not sure yet</option>
+                  <option>Portrait</option>
+                  <option>The Wedding Day</option>
+                  <option>The Celebration</option>
+                  <option>Event coverage</option>
+                </select>
+              </div>
+              <div class="field sm:col-span-2">
+                <label for="message">Tell me about your plans</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Venue, number of guests, what matters most to you…"></textarea>
+                <p class="field-error" id="message-error"></p>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-dark mt-8 w-full sm:w-auto">Send enquiry</button>
+            <p id="form-success" class="mt-6 hidden border-l-2 border-gold pl-4 font-serif text-xl italic" role="status" tabindex="-1"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-ink/10 bg-linen">
+    <div class="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-12 text-center md:flex-row md:justify-between md:text-left lg:px-10">
+      <div>
+        <p class="font-serif text-2xl">Aarav Mehta</p>
+        <p class="mt-1 text-xs uppercase tracking-[0.22em] text-muted">Wedding &amp; Portrait Photography</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-[0.2em] text-muted">
+          <li><a href="#work" class="nav-link">Work</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#packages" class="nav-link">Packages</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li><a href="https://www.instagram.com/aaravmehta.studio" target="_blank" rel="noopener" class="nav-link">Instagram</a></li>
+        </ul>
+      </nav>
+      <p class="text-xs text-muted">© <span id="year">2026</span> Aarav Mehta Photography. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

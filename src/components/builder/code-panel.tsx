@@ -59,18 +59,33 @@ export function CodePanel({ files, drafts, selectedPath, onSelect, onChange, onS
 
   return (
     <div className="flex h-full">
-      <nav className="w-56 shrink-0 overflow-y-auto border-r py-2 text-sm" aria-label="Project files">
+      <nav className="hidden w-56 shrink-0 overflow-y-auto border-r py-2 text-sm md:block" aria-label="Project files">
         <TreeLevel nodes={tree} depth={0} selected={path} drafts={drafts} onSelect={onSelect} />
       </nav>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex h-9 shrink-0 items-center gap-2 border-b px-3 text-xs">
-          <span className="truncate font-mono">{path ?? "No file selected"}</span>
+        <div className="flex h-10 shrink-0 items-center gap-2 border-b px-2 text-xs md:h-9 md:px-3">
+          <select
+            value={path ?? ""}
+            onChange={(e) => onSelect(e.target.value)}
+            aria-label="File"
+            className="h-8 min-w-0 flex-1 rounded-md border bg-background px-2 font-mono text-sm md:hidden"
+          >
+            {Object.keys(files)
+              .sort()
+              .map((p) => (
+                <option key={p} value={p}>
+                  {p in drafts ? "● " : ""}
+                  {p}
+                </option>
+              ))}
+          </select>
+          <span className="hidden truncate font-mono md:inline">{path ?? "No file selected"}</span>
           {dirty && <span className="text-amber-600 dark:text-amber-400">● unsaved</span>}
           {saveError && <span className="truncate text-destructive">{saveError}</span>}
           <Button size="xs" variant="outline" className="ml-auto" disabled={!dirty || saving} onClick={save}>
             {saving ? <Loader2 className="animate-spin" /> : <Save />} Save
-            <kbd className="ml-1 hidden text-[10px] opacity-60 sm:inline">Ctrl+S</kbd>
+            <kbd className="ml-1 hidden text-[10px] opacity-60 md:inline">Ctrl+S</kbd>
           </Button>
         </div>
         <div className="min-h-0 flex-1">

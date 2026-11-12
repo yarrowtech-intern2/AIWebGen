@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brightline Home Services | Plumbing &amp; Electrical in Riverton</title>
+  <meta name="description" content="Licensed plumbers and electricians serving Riverton and surrounding neighborhoods. Upfront flat-rate pricing, same-day service and a 2-year workmanship warranty." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef4fb',
+              100: '#d7e5f6',
+              200: '#b0cbec',
+              300: '#7ea8dc',
+              500: '#2f6bb8',
+              600: '#1f5498',
+              700: '#18437c',
+              800: '#123562',
+              900: '#0c2647',
+              950: '#071830'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-white font-sans text-slate-700 antialiased">
+
+  <!--
+    PLACEHOLDER BUSINESS DETAILS
+    Replace before going live: phone (555) 014-2780, email hello@brightlinehome.example,
+    address 1420 Harbor Avenue, Riverton, license numbers, ratings/review counts,
+    service areas and business hours.
+  -->
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header id="site-header" class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur transition-shadow">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
+      <a href="#top" class="flex items-center gap-2.5" aria-label="Brightline Home Services, back to top">
+        <svg class="h-9 w-9 lg:h-10 lg:w-10" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#0c2647"/>
+          <path d="M8 19.5 20 10l12 9.5" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.5 17.5V30h17V17.5" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M21.5 16.5 16.5 24h4l-1.5 6.5 5.5-8.5h-4.2l1.2-5.5Z" fill="#fbbf24"/>
+        </svg>
+        <span class="leading-tight">
+          <span class="block font-display text-lg font-extrabold tracking-tight text-brand-900">Brightline</span>
+          <span class="block text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">Home Services</span>
+        </span>
+      </a>
+
+      <nav aria-label="Primary" class="hidden lg:block">
+        <ul class="flex items-center gap-7 text-sm font-medium text-slate-600">
+          <li><a class="nav-link" href="#services">Services</a></li>
+          <li><a class="nav-link" href="#why-us">Why us</a></li>
+          <li><a class="nav-link" href="#process">How it works</a></li>
+          <li><a class="nav-link" href="#reviews">Reviews</a></li>
+          <li><a class="nav-link" href="#areas">Service areas</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href="tel:+15550142780" class="inline-flex items-center gap-2 rounded-full bg-amber-400 px-4 py-2.5 text-sm font-semibold text-brand-950 shadow-sm transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-700 focus-visible:ring-offset-2">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106a1.125 1.125 0 0 0-1.173.417l-.97 1.293a1.125 1.125 0 0 1-1.21.38 12.035 12.035 0 0 1-7.143-7.143 1.125 1.125 0 0 1 .38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+          <span class="hidden sm:inline">Call now</span>
+          <span class="hidden xl:inline font-medium">· (555) 014-2780</span>
+          <span class="sm:hidden">Call</span>
+        </a>
+        <button id="menu-toggle" type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-lg text-brand-900 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 lg:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+          <svg class="icon-open h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon-close hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobile-menu" aria-label="Mobile" class="hidden border-t border-slate-200 bg-white lg:hidden">
+      <ul class="mx-auto max-w-7xl space-y-1 px-4 py-4 text-base font-medium text-slate-700 sm:px-6">
+        <li><a class="mobile-link" href="#services">Services</a></li>
+        <li><a class="mobile-link" href="#why-us">Why us</a></li>
+        <li><a class="mobile-link" href="#process">How it works</a></li>
+        <li><a class="mobile-link" href="#reviews">Reviews</a></li>
+        <li><a class="mobile-link" href="#areas">Service areas</a></li>
+        <li><a class="mobile-link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section id="top" class="relative overflow-hidden bg-brand-900 text-white">
+      <div class="hero-pattern pointer-events-none absolute inset-0 opacity-40" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" aria-hidden="true"></div>
+
+      <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:px-8 lg:py-28">
+        <div>
+          <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-300">
+            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-amber-400"></span></span>
+            Same-day appointments available
+          </p>
+          <h1 class="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+            Plumbing &amp; electrical, <span class="text-amber-400">done right</span> the first time.
+          </h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-brand-100">
+            From a leaking water heater to a panel upgrade, Brightline's licensed technicians show up on time, quote a flat price before any work starts, and leave your home cleaner than they found it.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-7 py-3.5 text-base font-semibold text-brand-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-900">
+              Book a service
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638l-3.96-3.71a.75.75 0 1 1 1.024-1.096l5.25 4.92a.75.75 0 0 1 0 1.092l-5.25 4.92a.75.75 0 1 1-1.024-1.096l3.96-3.71H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg>
+            </a>
+            <a href="tel:+15550142780" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-base font-semibold text-white transition hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106a1.125 1.125 0 0 0-1.173.417l-.97 1.293a1.125 1.125 0 0 1-1.21.38 12.035 12.035 0 0 1-7.143-7.143 1.125 1.125 0 0 1 .38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+              24/7 emergency line
+            </a>
+          </div>
+
+          <!-- Trust line (placeholder figures) -->
+          <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 border-t border-white/10 pt-6 text-sm text-brand-100">
+            <div class="flex items-center gap-2">
+              <div class="flex text-amber-400" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L10 14.9l-5.25 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z"/></svg>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L10 14.9l-5.25 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z"/></svg>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L10 14.9l-5.25 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z"/></svg>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L10 14.9l-5.25 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z"/></svg>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L10 14.9l-5.25 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z"/></svg>
+              </div>
+              <span><strong class="font-semibold text-white">4.9/5</strong> from 1,200+ Google reviews</span>
+            </div>
+            <span class="hidden h-4 w-px bg-white/20 sm:block" aria-hidden="true"></span>
+            <span><strong class="font-semibold text-white">17 years</strong> serving Riverton (since 2009)</span>
+            <span class="hidden h-4 w-px bg-white/20 sm:block" aria-hidden="true"></span>
+            <span>Licensed, bonded &amp; insured</span>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="relative overflow-hidden rounded-3xl bg-brand-800 shadow-2xl ring-1 ring-white/10">
+            <img
+              src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1100&q=80"
+              alt="A Brightline technician repairing the pipes under a kitchen sink"
+              class="aspect-[4/3] w-full object-cover lg:aspect-[5/5]"
+              width="1100" height="1100" />
+          </div>
+          <!-- Floating badge -->
+          <div class="absolute -bottom-6 left-4 right-4 flex items-center gap-4 rounded-2xl bg-white p-4 text-slate-700 shadow-xl sm:left-auto sm:right-6 sm:w-80">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z"/></svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-brand-900">Average arrival: 58 minutes</p>
+              <p class="text-xs text-slate-500">For emergency calls within city limits</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section id="services" class="bg-slate-50 py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow">Our services</p>
+          <h2 class="section-title">One call for every pipe, wire and fixture</h2>
+          <p class="mt-4 text-lg text-slate-600">Residential plumbing and electrical work handled by our own employed, background-checked technicians, never subcontractors.</p>
+        </div>
+
+        <ul class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <li class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/><path stroke-linecap="round" d="M9.5 15a2.5 2.5 0 0 0 2.5 2.5"/></svg>
+            </span>
+            <h3 class="service-title">Emergency plumbing</h3>
+            <p class="service-text">Burst pipes, major leaks and overflowing toilets, fixed fast, day or night.</p>
+          </li>
+          <li class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path stroke-linecap="round" d="M12 4v5.5M12 14.5V20M4 12h5.5M14.5 12H20"/></svg>
+            </span>
+            <h3 class="service-title">Drain &amp; sewer cleaning</h3>
+            <p class="service-text">Camera inspections and hydro-jetting to clear stubborn clogs at the source.</p>
+          </li>
+          <li class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="2.5" width="12" height="17" rx="3"/><path stroke-linecap="round" d="M9 21.5h6M12 7.5v1M10 13.5c0-1.5 2-2 2-3.5 0 1.5 2 2 2 3.5a2 2 0 0 1-4 0Z"/></svg>
+            </span>
+            <h3 class="service-title">Water heaters</h3>
+            <p class="service-text">Repair and installation of tank and tankless heaters, often the same day.</p>
+          </li>
+          <li class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path stroke-linecap="round" d="M8 7h3M8 11h3M8 15h3M14.5 7h1.5M14.5 11h1.5M14.5 15h1.5"/></svg>
+            </span>
+            <h3 class="service-title">Panel upgrades</h3>
+            <p class="service-text">Replace outdated fuse boxes and add capacity for modern appliances safely.</p>
+          </li>
+          <li class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.5.4.9 1 .9 1.7V16h5.4v-.5c0-.7.4-1.3.9-1.7A6 6 0 0 0 12 3Z"/></svg>
+            </span>
+            <h3 class="service-title">Lighting &amp; wiring</h3>
+            <p class="service-text">New fixtures, outlets, ceiling fans and troubleshooting for flickers or dead circuits.</p>
+          </li>
+          <li class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 20V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14M2.5 20h13M14 9h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V8l-2.5-2.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 7 7.5 11h3l-2 4"/></svg>
+            </span>
+            <h3 class="service-title">EV charger installation</h3>
+            <p class="service-text">Level 2 home chargers installed to code, with permits handled for you.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ WHY CHOOSE US ============ -->
+    <section id="why-us" class="py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div class="lg:col-span-5">
+          <p class="eyebrow">Why Brightline</p>
+          <h2 class="section-title">The contractor your neighbors already trust</h2>
+          <p class="mt-4 text-lg text-slate-600">We built Brightline around the things homeowners told us they were tired of: vague quotes, no-shows and surprise bills. Here's what you get instead.</p>
+          <div class="mt-8 grid grid-cols-3 gap-4 rounded-2xl bg-brand-50 p-6 text-center">
+            <div>
+              <p class="font-display text-3xl font-extrabold text-brand-900">18k+</p>
+              <p class="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">Jobs done</p>
+            </div>
+            <div>
+              <p class="font-display text-3xl font-extrabold text-brand-900">24</p>
+              <p class="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">Technicians</p>
+            </div>
+            <div>
+              <p class="font-display text-3xl font-extrabold text-brand-900">98%</p>
+              <p class="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">On-time</p>
+            </div>
+          </div>
+        </div>
+
+        <ul class="grid gap-6 sm:grid-cols-2 lg:col-span-7">
+          <li class="why-card">
+            <span class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3 4.5 6v5.5c0 4.5 3.2 8.4 7.5 9.5 4.3-1.1 7.5-5 7.5-9.5V6L12 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/></svg>
+            </span>
+            <h3 class="mt-5 font-display text-lg font-bold text-brand-900">Licensed master tradespeople</h3>
+            <p class="mt-2 text-slate-600">Every job is led by a state-licensed plumber or electrician, fully bonded and insured.</p>
+          </li>
+          <li class="why-card">
+            <span class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6M9 11h6M9 15h3M6 3h12a1 1 0 0 1 1 1v16.5l-2.5-1.5-2.5 1.5-2-1.5-2 1.5-2.5-1.5L5 20.5V4a1 1 0 0 1 1-1Z"/></svg>
+            </span>
+            <h3 class="mt-5 font-display text-lg font-bold text-brand-900">Upfront, flat-rate pricing</h3>
+            <p class="mt-2 text-slate-600">You approve the exact price before we start. No hourly meter, no overtime surprises.</p>
+          </li>
+          <li class="why-card">
+            <span class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            </span>
+            <h3 class="mt-5 font-display text-lg font-bold text-brand-900">On time, or $50 off</h3>
+            <p class="mt-2 text-slate-600">We give you a two-hour arrival window and text when we're on the way. Late? The discount is automatic.</p>
+          </li>
+          <li class="why-card">
+            <span class="why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"/></svg>
+            </span>
+            <h3 class="mt-5 font-display text-lg font-bold text-brand-900">2-year workmanship warranty</h3>
+            <p class="mt-2 text-slate-600">If something we fixed fails, we come back and make it right, parts and labor included.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section id="process" class="relative overflow-hidden bg-brand-900 py-20 text-white sm:py-24">
+      <div class="hero-pattern pointer-events-none absolute inset-0 opacity-30" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow !text-amber-300">How it works</p>
+          <h2 class="section-title !text-white">Fixed in three simple steps</h2>
+          <p class="mt-4 text-lg text-brand-100">No runaround and no guesswork, just a clear plan from your first call to the final walkthrough.</p>
+        </div>
+
+        <ol class="relative mt-14 grid gap-8 md:grid-cols-3">
+          <li class="step-card">
+            <span class="step-number">1</span>
+            <h3 class="mt-6 font-display text-xl font-bold">Call or book online</h3>
+            <p class="mt-3 text-brand-100">Tell us what's going on. We'll confirm a two-hour arrival window, often for the same day.</p>
+          </li>
+          <li class="step-card">
+            <span class="step-number">2</span>
+            <h3 class="mt-6 font-display text-xl font-bold">Get a flat-rate quote</h3>
+            <p class="mt-3 text-brand-100">Your technician diagnoses the problem and gives you a written price before any work begins.</p>
+          </li>
+          <li class="step-card">
+            <span class="step-number">3</span>
+            <h3 class="mt-6 font-display text-xl font-bold">We fix it, guaranteed</h3>
+            <p class="mt-3 text-brand-100">The job gets done to code, we clean up, and the work is backed by our 2-year warranty.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section id="reviews" class="bg-slate-50 py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow">Customer reviews</p>
+          <h2 class="section-title">What Riverton homeowners are saying</h2>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-3">
+          <figure class="review-card">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote class="mt-4 flex-1 text-slate-700">
+              <p>"Our water heater died on a Sunday morning. Brightline had someone here by noon and a new unit installed before dinner. The price on the quote was exactly what we paid."</p>
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
+              <span class="avatar bg-brand-100 text-brand-800" aria-hidden="true">MO</span>
+              <span>
+                <span class="block font-semibold text-brand-900">Maria O.</span>
+                <span class="block text-sm text-slate-500">Westbrook · Water heater replacement</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote class="mt-4 flex-1 text-slate-700">
+              <p>"Daniel upgraded our 1960s panel and installed an EV charger in one visit. He pulled the permits, explained everything, and left the garage spotless. Highly recommend."</p>
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
+              <span class="avatar bg-amber-100 text-amber-800" aria-hidden="true">JT</span>
+              <span>
+                <span class="block font-semibold text-brand-900">James T.</span>
+                <span class="block text-sm text-slate-500">Oak Hollow · Panel upgrade &amp; EV charger</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote class="mt-4 flex-1 text-slate-700">
+              <p>"Two other companies wanted to dig up the yard. Brightline ran a camera down the line, found a root blockage and cleared it the same afternoon for a fraction of the cost."</p>
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
+              <span class="avatar bg-emerald-100 text-emerald-800" aria-hidden="true">PK</span>
+              <span>
+                <span class="block font-semibold text-brand-900">Priya K.</span>
+                <span class="block text-sm text-slate-500">Millbrook Heights · Sewer line cleaning</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICE AREAS ============ -->
+    <section id="areas" class="py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div>
+          <p class="eyebrow">Service areas</p>
+          <h2 class="section-title">Proudly serving Riverton and nearby communities</h2>
+          <p class="mt-4 text-lg text-slate-600">Our trucks are stationed across the metro area, so a fully stocked technician is never far away. No trip charges inside the areas below.</p>
+
+          <ul class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Neighborhoods and towns we serve">
+            <li class="area-chip">Downtown Riverton</li>
+            <li class="area-chip">Westbrook</li>
+            <li class="area-chip">Oak Hollow</li>
+            <li class="area-chip">Millbrook Heights</li>
+            <li class="area-chip">Cedar Park</li>
+            <li class="area-chip">Lakeside</li>
+            <li class="area-chip">North Fairview</li>
+            <li class="area-chip">Stonebridge</li>
+            <li class="area-chip">Pine Ridge</li>
+          </ul>
+
+          <p class="mt-6 text-sm text-slate-500">Outside these areas? <a href="tel:+15550142780" class="font-semibold text-brand-700 underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-brand-900">Call (555) 014-2780</a>. We often cover jobs up to 30 miles out.</p>
+        </div>
+
+        <!-- Decorative map illustration -->
+        <div class="relative rounded-3xl bg-brand-50 p-6 sm:p-10">
+          <svg viewBox="0 0 400 320" class="h-auto w-full" role="img" aria-label="Illustrated map showing Brightline's 25-mile service radius around Riverton">
+            <defs>
+              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M20 0H0V20" fill="none" stroke="#d7e5f6" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="400" height="320" rx="16" fill="url(#grid)"/>
+            <path d="M0 210c60-20 90 10 150-10s100-60 160-40 70 20 90 15" fill="none" stroke="#7ea8dc" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+            <path d="M40 40 360 280M60 290 340 30M200 0v320" stroke="#b0cbec" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+            <circle cx="200" cy="160" r="130" fill="#1f5498" opacity=".08"/>
+            <circle cx="200" cy="160" r="130" fill="none" stroke="#1f5498" stroke-width="2" stroke-dasharray="6 6"/>
+            <circle cx="200" cy="160" r="75" fill="#1f5498" opacity=".1"/>
+            <g fill="#0c2647">
+              <circle cx="130" cy="110" r="5"/><circle cx="270" cy="95" r="5"/>
+              <circle cx="110" cy="210" r="5"/><circle cx="285" cy="215" r="5"/>
+              <circle cx="200" cy="60" r="5"/><circle cx="215" cy="255" r="5"/>
+              <circle cx="320" cy="150" r="5"/><circle cx="85" cy="150" r="5"/>
+            </g>
+            <g transform="translate(200 160)">
+              <circle r="22" fill="#fbbf24" opacity=".35"/>
+              <path d="M0-26c-9 0-16 7-16 16C-16 2 0 18 0 18S16 2 16-10c0-9-7-16-16-16Z" fill="#0c2647" transform="translate(0 -6)"/>
+              <circle cy="-16" r="6" fill="#fbbf24"/>
+            </g>
+          </svg>
+          <div class="absolute bottom-4 left-4 rounded-xl bg-white px-4 py-3 shadow-md sm:bottom-8 sm:left-8">
+            <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Coverage radius</p>
+            <p class="font-display text-lg font-bold text-brand-900">25 miles from downtown</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="bg-slate-50 py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow">Contact us</p>
+          <h2 class="section-title">Request a service call</h2>
+          <p class="mt-4 text-lg text-slate-600">Send us the details and a dispatcher will call you back within 30 minutes during business hours. For emergencies, please call.</p>
+        </div>
+
+        <div class="mt-14 grid gap-8 lg:grid-cols-5">
+          <!-- Form -->
+          <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-10 lg:col-span-3">
+            <form id="contact-form" novalidate class="space-y-6">
+              <div class="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label for="name" class="form-label">Full name <span class="text-red-600" aria-hidden="true">*</span></label>
+                  <input id="name" name="name" type="text" autocomplete="name" required class="form-input" placeholder="Jordan Smith" aria-describedby="name-error" />
+                  <p id="name-error" class="form-error hidden">Please enter your name.</p>
+                </div>
+                <div>
+                  <label for="phone" class="form-label">Phone number <span class="text-red-600" aria-hidden="true">*</span></label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required class="form-input" placeholder="(555) 123-4567" aria-describedby="phone-error" />
+                  <p id="phone-error" class="form-error hidden">Please enter a valid 10-digit phone number.</p>
+                </div>
+              </div>
+
+              <div>
+                <label for="service" class="form-label">Service needed <span class="text-red-600" aria-hidden="true">*</span></label>
+                <div class="relative">
+                  <select id="service" name="service" required class="form-input appearance-none pr-10" aria-describedby="service-error">
+                    <option value="">Select a service…</option>
+                    <optgroup label="Plumbing">
+                      <option>Emergency plumbing</option>
+                      <option>Drain &amp; sewer cleaning</option>
+                      <option>Water heater repair / install</option>
+                      <option>Leak detection &amp; pipe repair</option>
+                    </optgroup>
+                    <optgroup label="Electrical">
+                      <option>Panel upgrade</option>
+                      <option>Lighting &amp; wiring</option>
+                      <option>EV charger installation</option>
+                      <option>Electrical troubleshooting</option>
+                    </optgroup>
+                    <option>Other / not sure</option>
+                  </select>
+                  <svg class="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/></svg>
+                </div>
+                <p id="service-error" class="form-error hidden">Please choose a service.</p>
+              </div>
+
+              <div>
+                <label for="message" class="form-label">Describe the problem <span class="font-normal text-slate-400">(optional)</span></label>
+                <textarea id="message" name="message" rows="5" class="form-input resize-y" placeholder="e.g. Kitchen sink is draining slowly and making a gurgling sound."></textarea>
+              </div>
+
+              <div class="flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <p class="text-xs text-slate-500">We'll only use your details to respond to this request.</p>
+                <button type="submit" id="submit-btn" class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-900 px-7 py-3.5 text-base font-semibold text-white transition hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-70">
+                  <span class="btn-label">Request a call back</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638l-3.96-3.71a.75.75 0 1 1 1.024-1.096l5.25 4.92a.75.75 0 0 1 0 1.092l-5.25 4.92a.75.75 0 1 1-1.024-1.096l3.96-3.71H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg>
+                </button>
+              </div>
+            </form>
+
+            <div id="form-success" class="hidden text-center" role="status" aria-live="polite" tabindex="-1">
+              <span class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7"/></svg>
+              </span>
+              <h3 class="mt-6 font-display text-2xl font-bold text-brand-900">Thanks, <span id="success-name">we've got it</span>!</h3>
+              <p class="mx-auto mt-3 max-w-md text-slate-600">A Brightline dispatcher will call you back within 30 minutes during business hours to confirm your appointment window.</p>
+              <button type="button" id="form-reset" class="mt-8 text-sm font-semibold text-brand-700 underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-brand-900">Send another request</button>
+            </div>
+          </div>
+
+          <!-- Contact info + hours -->
+          <aside class="space-y-6 lg:col-span-2" aria-label="Contact details and business hours">
+            <div class="rounded-3xl bg-brand-900 p-8 text-white">
+              <h3 class="font-display text-xl font-bold">Talk to a real person</h3>
+              <ul class="mt-6 space-y-5 text-brand-100">
+                <li class="flex gap-4">
+                  <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106a1.125 1.125 0 0 0-1.173.417l-.97 1.293a1.125 1.125 0 0 1-1.21.38 12.035 12.035 0 0 1-7.143-7.143 1.125 1.125 0 0 1 .38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg></span>
+                  <span>
+                    <span class="block text-xs uppercase tracking-wide text-brand-300">Phone (24/7 emergencies)</span>
+                    <a href="tel:+15550142780" class="text-lg font-semibold text-white hover:text-amber-300">(555) 014-2780</a>
+                  </span>
+                </li>
+                <li class="flex gap-4">
+                  <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg></span>
+                  <span>
+                    <span class="block text-xs uppercase tracking-wide text-brand-300">Email</span>
+                    <a href="mailto:hello@brightlinehome.example" class="font-semibold text-white hover:text-amber-300">hello@brightlinehome.example</a>
+                  </span>
+                </li>
+                <li class="flex gap-4">
+                  <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg></span>
+                  <span>
+                    <span class="block text-xs uppercase tracking-wide text-brand-300">Office</span>
+                    <span class="font-semibold text-white">1420 Harbor Avenue, Suite 200<br />Riverton, ST 00000</span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="font-display text-xl font-bold text-brand-900">Business hours</h3>
+                <span id="open-status" class="hidden rounded-full px-3 py-1 text-xs font-semibold"></span>
+              </div>
+              <table class="mt-5 w-full text-sm">
+                <caption class="sr-only">Office and scheduling hours</caption>
+                <tbody id="hours-table" class="divide-y divide-slate-100">
+                  <tr data-days="1,2,3,4,5" data-open="7" data-close="19"><th scope="row" class="py-3 text-left font-medium text-slate-600">Monday – Friday</th><td class="py-3 text-right font-semibold text-brand-900">7:00 am – 7:00 pm</td></tr>
+                  <tr data-days="6" data-open="8" data-close="16"><th scope="row" class="py-3 text-left font-medium text-slate-600">Saturday</th><td class="py-3 text-right font-semibold text-brand-900">8:00 am – 4:00 pm</td></tr>
+                  <tr data-days="0"><th scope="row" class="py-3 text-left font-medium text-slate-600">Sunday</th><td class="py-3 text-right font-semibold text-brand-900">Emergencies only</td></tr>
+                </tbody>
+              </table>
+              <p class="mt-5 flex items-start gap-2 rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-amber-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 6a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 6Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"/></svg>
+                <span>Emergency plumbing and electrical service is available 24/7, including holidays.</span>
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-brand-950 text-brand-200">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div class="lg:col-span-1">
+          <a href="#top" class="flex items-center gap-2.5" aria-label="Brightline Home Services, back to top">
+            <svg class="h-10 w-10" viewBox="0 0 40 40" aria-hidden="true">
+              <rect width="40" height="40" rx="10" fill="#18437c"/>
+              <path d="M8 19.5 20 10l12 9.5" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5 17.5V30h17V17.5" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M21.5 16.5 16.5 24h4l-1.5 6.5 5.5-8.5h-4.2l1.2-5.5Z" fill="#fbbf24"/>
+            </svg>
+            <span class="leading-tight">
+              <span class="block font-display text-lg font-extrabold text-white">Brightline</span>
+              <span class="block text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-300">Home Services</span>
+            </span>
+          </a>
+          <p class="mt-5 text-sm leading-relaxed">Licensed plumbing and electrical service for Riverton homes since 2009. Honest prices, on-time arrivals, guaranteed work.</p>
+        </div>
+
+        <nav aria-label="Footer: company">
+          <h2 class="footer-heading">Company</h2>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li><a class="footer-link" href="#why-us">Why Brightline</a></li>
+            <li><a class="footer-link" href="#process">How it works</a></li>
+            <li><a class="footer-link" href="#reviews">Reviews</a></li>
+            <li><a class="footer-link" href="#areas">Service areas</a></li>
+            <li><a class="footer-link" href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Footer: services">
+          <h2 class="footer-heading">Services</h2>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li><a class="footer-link" href="#services">Emergency plumbing</a></li>
+            <li><a class="footer-link" href="#services">Drain &amp; sewer cleaning</a></li>
+            <li><a class="footer-link" href="#services">Water heaters</a></li>
+            <li><a class="footer-link" href="#services">Panel upgrades</a></li>
+            <li><a class="footer-link" href="#services">EV charger installation</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h2 class="footer-heading">Get in touch</h2>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li><a class="footer-link font-semibold !text-white" href="tel:+15550142780">(555) 014-2780</a></li>
+            <li><a class="footer-link" href="mailto:hello@brightlinehome.example">hello@brightlinehome.example</a></li>
+            <li>1420 Harbor Avenue, Suite 200<br />Riverton, ST 00000</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-brand-950 transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-950">Book a service</a>
+        </div>
+      </div>
+
+      <div class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs text-brand-300 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="year">2026</span> Brightline Home Services LLC. All rights reserved.</p>
+        <p>Plumbing Lic. #PL-000000 · Electrical Lic. #EC-000000 · Bonded &amp; insured</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

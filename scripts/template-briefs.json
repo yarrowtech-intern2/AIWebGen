@@ -1,0 +1,22 @@
+{
+  "business-landing": {
+    "name": "Business landing page",
+    "description": "A local service business: services, process, testimonials and a contact form.",
+    "brief": "A landing page for 'Brightline Home Services', a plumbing and electrical company serving a mid-sized city. Sections: sticky header with logo, nav and a 'Call now' button; hero with headline, short pitch, two CTAs and a trust line (rating, years in business); services grid (6 services with icons and one-line descriptions); 'Why choose us' (4 points); 3-step process; testimonials (3); service areas; contact section with a working-looking form (name, phone, service dropdown, message) and business hours; footer. Clean, trustworthy look: deep blue with a warm amber accent. Placeholder business details should look realistic but be obviously replaceable."
+  },
+  "portfolio": {
+    "name": "Portfolio",
+    "description": "A creative professional's portfolio: filterable gallery, packages and contact.",
+    "brief": "A portfolio site for 'Aarav Mehta', a wedding and portrait photographer. Sections: minimal header; full-bleed hero with name, tagline and 'View work' / 'Book a shoot' buttons; gallery grid of 9 photos with category filter buttons (All, Weddings, Portraits, Events) that work with JavaScript; about section with photo and short story; packages (3 tiers with INR prices and what's included); testimonials (3); contact section with email, Instagram handle and an enquiry form; footer. Elegant, editorial look: off-white background, near-black text, serif display headings, subtle gold accent."
+  },
+  "restaurant-cafe": {
+    "name": "Restaurant / café",
+    "description": "A café or restaurant: tabbed menu with prices, story, hours and reservations.",
+    "brief": "A website for 'The Copper Kettle', a neighbourhood café and bakery. Sections: header with logo and nav; hero with a warm photo, tagline and 'See the menu' / 'Reserve a table' buttons; menu with category tabs (Coffee, Tea, Breakfast, Bakes) that work with JavaScript, 5-6 items each with short descriptions and INR prices; our story; a small photo gallery (6 photos); opening hours table and address with a 'Get directions' link; reservation form (name, phone, date, time, guests); footer with social links. Cosy look: cream, espresso brown and copper accents, rounded friendly typography."
+  },
+  "saas-product": {
+    "name": "SaaS product",
+    "description": "A software product: features, pricing tiers with billing toggle, FAQ and sign-up.",
+    "brief": "A landing page for 'Ledgerly', an invoicing and payments app for freelancers. Sections: header with logo, nav and 'Start free' button; hero with headline, subheadline, email sign-up field, and a product mockup built with HTML/CSS (an invoice card UI, no screenshot image); logo strip of 5 fictional customer brands (text logos); features grid (6 with icons); 'How it works' in 3 steps; pricing with 3 tiers (Free, Pro, Team) and a working monthly/yearly toggle (yearly saves 20%); testimonials (3); FAQ accordion (6 questions) that works with JavaScript; final call to action; footer with link columns. Modern look: white background, indigo primary, soft gradients, generous whitespace."
+  }
+}
