@@ -2,7 +2,7 @@
 
 An AI website builder: describe a site, and Claude builds it by editing a virtual project, then refines it as you chat. See [projectDetails.md](projectDetails.md) for the product brief and [docs/](docs/) for the architecture, roadmap and decision log.
 
-**Status:** M0–M2 are done: AI core plus the builder UI (chat, live preview, code editor). Next is M3 (accounts, version history).
+**Status:** M0–M3 are done: AI core, builder UI (chat, live preview, code editor), accounts, and version history. Next is M4 (React preview, templates, ZIP export).
 
 ## Requirements
 
@@ -16,16 +16,17 @@ An AI website builder: describe a site, and Claude builds it by editing a virtua
 npm install                 # also generates the Prisma client
 cp .env.example .env        # defaults: AI_PROVIDER=claude-code, SQLite
 npm run db:migrate          # creates dev.db
-npm run db:seed             # demo user
+npm run db:seed             # demo user: demo@example.com / demo12345 (development only)
 npm run dev                 # http://localhost:3000
 ```
 
 ## Use the builder
 
-1. `npm run dev`, then open http://localhost:3000
+1. `npm run dev`, then open http://localhost:3000 and create an account (or log in as the demo user)
 2. Create a project (Static kit), then describe your site in the chat
 3. Watch the Preview tab update as Claude writes files. Switch to Code to view or edit them (Ctrl+S saves)
 4. Keep chatting to change the site. Stop cancels a running turn
+5. The History tab lists every version; Restore brings back an earlier one (as a new version)
 
 ## Try the AI agent from the terminal
 
@@ -66,6 +67,8 @@ src/server/ai/       provider layer, tools, prompts, runner
 src/app/               pages (/, /project/[id]), API routes, /preview file server
 src/components/builder chat, preview and code panels
 src/server/projects/   file stores (memory, DB) and project service
+src/server/auth/      sessions, passwords, rate limiting
+src/proxy.ts          login redirects
 src/server/db.ts     Prisma client (SQLite via better-sqlite3 adapter)
 prisma/              schema, migrations, seed
 scripts/agent-try.ts terminal smoke test

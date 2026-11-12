@@ -49,7 +49,7 @@ flowchart LR
 | AI (production) | `@anthropic-ai/sdk`, with `ANTHROPIC_API_KEY` |
 | Validation | `zod` (tool input schemas, API bodies) |
 | DB / ORM | Prisma; SQLite (`file:./dev.db`) for development, Postgres later |
-| Auth | Auth.js (NextAuth v5) Credentials provider, `bcryptjs`, JWT session |
+| Auth | Own small session module: `bcryptjs` password hashes, HS256 JWT (`jose`) in an httpOnly SameSite=Lax cookie; `src/proxy.ts` handles optimistic redirects (see D19) |
 | Export | `jszip` |
 
 ## 3. Provider layer (the "provider switch")
@@ -210,8 +210,7 @@ Later optimisation: content-addressed file blobs to remove duplicate content acr
 
 | Method & path | Purpose |
 |---|---|
-| `POST /api/auth/register` | Create an account (email, password ≥ 8 chars) |
-| `/api/auth/[...nextauth]` | Auth.js sign-in / sign-out / session |
+| `POST /api/auth/register` · `login` · `logout` | Create an account (email, password ≥ 8 chars) / log in / log out. Rate limited |
 | `GET /api/projects` · `POST /api/projects` | List / create (`{ name, kit, templateSlug? }`) |
 | `GET · PATCH · DELETE /api/projects/:id` | Read / rename / delete |
 | `GET /api/projects/:id/files` · `PUT /api/projects/:id/files` | Get the file map / save manual edits (creates a version) |
@@ -220,7 +219,7 @@ Later optimisation: content-addressed file blobs to remove duplicate content acr
 | `GET /api/projects/:id/versions` · `POST /api/projects/:id/versions/:vid/restore` | History / restore |
 | `GET /api/projects/:id/export` | ZIP download |
 | `GET /api/templates?kit=` | Template catalogue |
-| `GET /preview/:id/[...path]` | Static kit preview file server (owner-only) |
+| `GET /preview/:token/[...path]` | Static kit preview file server. `token` is a signed 12-hour link for one project, because the sandboxed iframe sends no cookies |
 
 Every `/api/projects/*` route checks that the session user owns the project.
 
@@ -260,7 +259,7 @@ agentwebbuilder/
 | `AI_EFFORT` | `medium` | `low`, `medium`, `high`, `xhigh` or `max` |
 | `ANTHROPIC_API_KEY` | `sk-ant-…` | Required only for `anthropic-api` |
 | `DATABASE_URL` | `file:./dev.db` | Postgres URL in production |
-| `AUTH_SECRET` | random 32 bytes | Signs the Auth.js JWT |
+| `AUTH_SECRET` | random 32+ chars | Signs session cookies and preview tokens. Changing it logs everyone out |
 
 ## 11. Risks & mitigations
 

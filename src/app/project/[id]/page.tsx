@@ -3,12 +3,14 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Builder, type BuilderMessage } from "@/components/builder/builder";
 import { isTurnRunning } from "@/server/ai/active-turns";
+import { requirePageUser } from "@/server/auth/session";
+import { createPreviewToken } from "@/server/projects/preview-token";
 import type { StoredAssistantMeta } from "@/server/projects/service";
-import { getCurrentUser, getProject, listFiles, listMessages } from "@/server/projects/service";
+import { getProject, listFiles, listMessages } from "@/server/projects/service";
 
 async function BuilderLoader({ params }: { params: PageProps<"/project/[id]">["params"] }) {
   const { id } = await params;
-  const user = await getCurrentUser();
+  const user = await requirePageUser();
   const project = await getProject(user.id, id);
   if (!project) notFound();
 
@@ -22,14 +24,17 @@ async function BuilderLoader({ params }: { params: PageProps<"/project/[id]">["p
       changedFiles: meta.changedFiles ?? [],
       activity: [],
       error: meta.error,
+      versionNumber: meta.versionNumber,
     };
   });
 
   return (
     <Builder
       project={{ id: project.id, name: project.name, kit: project.kit }}
+      userEmail={user.email}
       initialFiles={Object.fromEntries(files.map((f) => [f.path, f.content]))}
       initialMessages={initialMessages}
+      initialPreviewToken={createPreviewToken(project.id)}
       busyOnLoad={isTurnRunning(id)}
     />
   );

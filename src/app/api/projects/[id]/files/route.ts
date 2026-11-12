@@ -1,15 +1,17 @@
 import { z } from "zod";
 import { ToolInputError } from "@/server/ai/tools";
 import { errorResponse, HttpError, readJson, requireProject } from "@/server/http";
+import { createPreviewToken } from "@/server/projects/preview-token";
 import { listFiles, saveFile } from "@/server/projects/service";
 
 const SaveFile = z.object({ path: z.string().min(1), content: z.string() });
 
+/** Files plus a fresh preview token (the builder refreshes it with every file reload). */
 export async function GET(_req: Request, ctx: RouteContext<"/api/projects/[id]/files">) {
   try {
     const { id } = await ctx.params;
     await requireProject(id);
-    return Response.json({ files: await listFiles(id) });
+    return Response.json({ files: await listFiles(id), previewToken: createPreviewToken(id) });
   } catch (err) {
     return errorResponse(err);
   }

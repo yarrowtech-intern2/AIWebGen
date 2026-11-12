@@ -5,7 +5,7 @@ import { runAgentTurn } from "@/server/ai";
 import { endTurn, startTurn } from "@/server/ai/active-turns";
 import { errorResponse, HttpError, readJson, requireProject } from "@/server/http";
 import { DbFileStore } from "@/server/projects/db-file-store";
-import { addMessage, getChatHistory, touchProject } from "@/server/projects/service";
+import { addMessage, createVersion, getChatHistory, touchProject } from "@/server/projects/service";
 
 const ChatRequest = z.object({ message: z.string().trim().min(1).max(10_000) });
 
@@ -69,12 +69,25 @@ export async function POST(req: Request, ctx: RouteContext<"/api/projects/[id]/c
         } finally {
           try {
             const content = (finalText || streamedText).trim();
-            const saved = await addMessage(id, "assistant", content, {
-              changedFiles: [...changed],
-              ...(error ? { error } : {}),
-            });
-            if (changed.size > 0) await touchProject(id);
-            send({ type: "saved", messageId: saved.id });
+            // One version per turn that changed files (including stopped or failed turns).
+            let version: { id: string; number: number } | undefined;
+            if (changed.size > 0) {
+              await touchProject(id);
+              const summary = message.length > 80 ? `${message.slice(0, 77)}…` : message;
+              version = await createVersion(id, "ai", error ? `${summary} (incomplete)` : summary);
+            }
+            const saved = await addMessage(
+              id,
+              "assistant",
+              content,
+              {
+                changedFiles: [...changed],
+                ...(error ? { error } : {}),
+                ...(version ? { versionNumber: version.number } : {}),
+              },
+              version?.id,
+            );
+            send({ type: "saved", messageId: saved.id, versionNumber: version?.number });
           } finally {
             endTurn(id, abort);
             if (open) sink.close();

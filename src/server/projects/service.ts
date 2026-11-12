@@ -4,19 +4,7 @@ import type { ChatTurn } from "@/server/ai/types";
 import { LIMITS, normalizeProjectPath, ToolInputError } from "@/server/ai/tools";
 import { db } from "@/server/db";
 
-const DEMO_EMAIL = "demo@example.com";
-
-/**
- * M2: everything belongs to the seeded demo user.
- * M3 replaces this with the Auth.js session user.
- */
-export async function getCurrentUser() {
-  return db.user.upsert({
-    where: { email: DEMO_EMAIL },
-    update: {},
-    create: { email: DEMO_EMAIL, name: "Demo User", passwordHash: "UNSET-until-M3" },
-  });
-}
+// ---- Projects --------------------------------------------------------------------
 
 export async function listProjects(userId: string) {
   return db.project.findMany({
@@ -28,7 +16,7 @@ export async function listProjects(userId: string) {
 
 export async function createProject(userId: string, input: { name: string; kit: string }) {
   const kit = getKit(input.kit);
-  return db.project.create({
+  const project = await db.project.create({
     data: {
       userId,
       name: input.name,
@@ -39,6 +27,8 @@ export async function createProject(userId: string, input: { name: string; kit: 
     },
     select: { id: true },
   });
+  await createVersion(project.id, "template", "Starter files");
+  return project;
 }
 
 /** Returns the project only if it belongs to the user. */
@@ -46,10 +36,20 @@ export async function getProject(userId: string, projectId: string) {
   return db.project.findFirst({ where: { id: projectId, userId } });
 }
 
+export async function renameProject(projectId: string, name: string) {
+  await db.project.update({ where: { id: projectId }, data: { name } });
+}
+
 export async function deleteProject(userId: string, projectId: string) {
   const { count } = await db.project.deleteMany({ where: { id: projectId, userId } });
   return count > 0;
 }
+
+export async function touchProject(projectId: string) {
+  await db.project.update({ where: { id: projectId }, data: { updatedAt: new Date() } });
+}
+
+// ---- Files -----------------------------------------------------------------------
 
 export async function listFiles(projectId: string) {
   return db.projectFile.findMany({
@@ -63,7 +63,13 @@ export async function getFile(projectId: string, path: string) {
   return db.projectFile.findUnique({ where: { projectId_path: { projectId, path } } });
 }
 
-/** Manual save from the code editor. Same path and size rules as the agent's tools. */
+const MANUAL_COALESCE_MS = 2 * 60 * 1000;
+
+/**
+ * Manual save from the code editor. Same path and size rules as the agent's tools.
+ * Repeated saves of the same file within 2 minutes update one version instead of
+ * creating a new one per Ctrl+S.
+ */
 export async function saveFile(project: { id: string; kit: string }, rawPath: string, content: string) {
   const path = normalizeProjectPath(rawPath, getKit(project.kit).allowedExtensions);
   if (Buffer.byteLength(content, "utf8") > LIMITS.maxFileBytes) {
@@ -75,16 +81,64 @@ export async function saveFile(project: { id: string; kit: string }, rawPath: st
     create: { projectId: project.id, path, content },
   });
   await touchProject(project.id);
+
+  const summary = `Edited ${path}`;
+  const latest = await db.version.findFirst({ where: { projectId: project.id }, orderBy: { number: "desc" } });
+  if (latest && latest.source === "manual" && latest.summary === summary && Date.now() - latest.createdAt.getTime() < MANUAL_COALESCE_MS) {
+    await db.version.update({ where: { id: latest.id }, data: { snapshot: JSON.stringify(await snapshotFiles(project.id)) } });
+  } else {
+    await createVersion(project.id, "manual", summary);
+  }
   return path;
 }
 
-export async function touchProject(projectId: string) {
-  await db.project.update({ where: { id: projectId }, data: { updatedAt: new Date() } });
+// ---- Versions --------------------------------------------------------------------
+
+export type VersionSource = "ai" | "manual" | "template" | "restore";
+
+async function snapshotFiles(projectId: string) {
+  const files = await listFiles(projectId);
+  return Object.fromEntries(files.map((f) => [f.path, f.content]));
 }
 
-// ---- Chat ----------------------------------------------------------------------
+/** Snapshots the current working copy as the next version number. */
+export async function createVersion(projectId: string, source: VersionSource, summary: string) {
+  const snapshot = JSON.stringify(await snapshotFiles(projectId));
+  return db.$transaction(async (tx) => {
+    const last = await tx.version.findFirst({ where: { projectId }, orderBy: { number: "desc" }, select: { number: true } });
+    const version = await tx.version.create({
+      data: { projectId, number: (last?.number ?? 0) + 1, source, summary: summary.slice(0, 200), snapshot },
+      select: { id: true, number: true },
+    });
+    await tx.project.update({ where: { id: projectId }, data: { currentVersionId: version.id } });
+    return version;
+  });
+}
 
-export type StoredAssistantMeta = { changedFiles?: string[]; error?: string };
+export async function listVersions(projectId: string) {
+  return db.version.findMany({
+    where: { projectId },
+    orderBy: { number: "desc" },
+    select: { id: true, number: true, source: true, summary: true, createdAt: true },
+  });
+}
+
+/** Replaces the working copy with a version's files and records the restore as a new version. */
+export async function restoreVersion(projectId: string, versionId: string) {
+  const version = await db.version.findFirst({ where: { id: versionId, projectId } });
+  if (!version) return null;
+  const files = JSON.parse(version.snapshot) as Record<string, string>;
+  await db.$transaction([
+    db.projectFile.deleteMany({ where: { projectId } }),
+    db.projectFile.createMany({ data: Object.entries(files).map(([path, content]) => ({ projectId, path, content })) }),
+    db.project.update({ where: { id: projectId }, data: { updatedAt: new Date() } }),
+  ]);
+  return createVersion(projectId, "restore", `Restored v${version.number}`);
+}
+
+// ---- Chat ------------------------------------------------------------------------
+
+export type StoredAssistantMeta = { changedFiles?: string[]; error?: string; versionNumber?: number };
 
 export async function listMessages(projectId: string) {
   return db.chatMessage.findMany({
@@ -99,9 +153,10 @@ export async function addMessage(
   role: "user" | "assistant",
   content: string,
   meta?: StoredAssistantMeta,
+  versionId?: string,
 ) {
   return db.chatMessage.create({
-    data: { projectId, role, content, raw: meta ? JSON.stringify(meta) : null },
+    data: { projectId, role, content, raw: meta ? JSON.stringify(meta) : null, versionId },
     select: { id: true },
   });
 }

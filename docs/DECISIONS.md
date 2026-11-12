@@ -20,6 +20,9 @@
 | D16 | 2026-11-12 | Until M3, every project belongs to the seeded demo user | Lets the UI ship before accounts |
 | D17 | 2026-11-12 | Preview responses carry a CSP `sandbox` and `Access-Control-Allow-Origin: *` | The sandboxed iframe has no origin, so module scripts and `fetch()` need CORS; the CSP keeps generated pages sandboxed even when opened in their own tab. M3 needs a signed preview token, because the iframe sends no cookies |
 | D18 | 2026-11-12 | One running turn per project, tracked in memory | Prevents two turns racing on the same files; a multi-server deployment needs a shared store such as Redis |
+| D19 | 2026-11-12 | Own session module (bcrypt + `jose` JWT cookie) instead of Auth.js | With email and password only, Auth.js adds little beyond setup risk on Next.js 16 / Cache Components; the module is about 60 lines. Reconsider if social login is added |
+| D20 | 2026-11-12 | Preview served under a signed, expiring per-project token (`/preview/<token>/…`) | The sandboxed iframe sends no cookies; relative links keep the token automatically. The builder refreshes it with every file reload |
+| D21 | 2026-11-12 | One version per AI turn that changed files, per manual save (repeat saves of the same file within 2 minutes are merged), per restore | Full snapshots are simple and sites are small; restoring creates a new version, so history is never rewritten |
 
 ## Open questions
 

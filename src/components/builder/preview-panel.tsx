@@ -15,12 +15,13 @@ const DEVICES = [
 
 type Props = {
   project: ProjectInfo;
+  previewToken: string;
   files: Record<string, string>;
   version: number;
   onReload: () => void;
 };
 
-export function PreviewPanel({ project, files, version, onReload }: Props) {
+export function PreviewPanel({ project, previewToken, files, version, onReload }: Props) {
   const [device, setDevice] = useState<(typeof DEVICES)[number]["id"]>("desktop");
   const [page, setPage] = useState("index.html");
 
@@ -36,7 +37,7 @@ export function PreviewPanel({ project, files, version, onReload }: Props) {
     .filter((p) => p.endsWith(".html"))
     .sort((a, b) => (a === "index.html" ? -1 : b === "index.html" ? 1 : a.localeCompare(b)));
   const currentPage = pages.includes(page) ? page : (pages[0] ?? "index.html");
-  const src = `/preview/${project.id}/${currentPage}?v=${version}`;
+  const src = `/preview/${previewToken}/${currentPage}?v=${version}`;
   const width = DEVICES.find((d) => d.id === device)!.width;
 
   return (
@@ -86,7 +87,7 @@ export function PreviewPanel({ project, files, version, onReload }: Props) {
         <Tooltip>
           <TooltipTrigger asChild>
             <Button size="icon-sm" variant="ghost" asChild>
-              <a href={`/preview/${project.id}/${currentPage}`} target="_blank" rel="noopener noreferrer" aria-label="Open in new tab">
+              <a href={`/preview/${previewToken}/${currentPage}`} target="_blank" rel="noopener noreferrer" aria-label="Open in new tab">
                 <ExternalLink />
               </a>
             </Button>

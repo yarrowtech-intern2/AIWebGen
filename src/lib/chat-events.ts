@@ -1,7 +1,7 @@
 import type { AgentEvent } from "@/server/ai/types";
 
 /** Server-sent events from POST /api/projects/:id/chat: the agent's events plus a final "saved". */
-export type ChatStreamEvent = AgentEvent | { type: "saved"; messageId: string };
+export type ChatStreamEvent = AgentEvent | { type: "saved"; messageId: string; versionNumber?: number };
 
 /** Parses a fetch() response body of Server-Sent Events into JSON events. */
 export async function* readEventStream(body: ReadableStream<Uint8Array>): AsyncGenerator<ChatStreamEvent> {

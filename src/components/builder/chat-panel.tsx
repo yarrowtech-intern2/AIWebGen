@@ -172,10 +172,15 @@ function AssistantMessage({ message: m, onOpenFile }: { message: BuilderMessage;
         </div>
       )}
 
-      {!m.streaming && m.usage && (
+      {!m.streaming && (m.usage || m.versionNumber) && (
         <span className="text-[11px] text-muted-foreground">
-          {m.usage.inputTokens.toLocaleString()} in · {m.usage.outputTokens.toLocaleString()} out
-          {m.usage.costUsd !== undefined && ` · ~$${m.usage.costUsd.toFixed(3)}`}
+          {m.versionNumber && <>Saved as v{m.versionNumber}{m.usage && " · "}</>}
+          {m.usage && (
+            <>
+              {m.usage.inputTokens.toLocaleString()} in · {m.usage.outputTokens.toLocaleString()} out
+              {m.usage.costUsd !== undefined && ` · ~${m.usage.costUsd.toFixed(3)}`}
+            </>
+          )}
         </span>
       )}
     </div>

@@ -1,50 +1,20 @@
-import { FileCode2, Sparkles } from "lucide-react";
-import Link from "next/link";
-import { connection } from "next/server";
+import { Loader2, Sparkles } from "lucide-react";
 import { Suspense } from "react";
 import { NewProjectForm } from "@/components/projects/new-project-form";
+import { ProjectCard } from "@/components/projects/project-card";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { UserMenu } from "@/components/user-menu";
 import { kits } from "@/kits";
 import type { KitId } from "@/kits/types";
-import { getCurrentUser, listProjects } from "@/server/projects/service";
+import { requirePageUser } from "@/server/auth/session";
+import { listProjects } from "@/server/projects/service";
 
 const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" });
 
-async function ProjectList() {
-  await connection(); // always fresh: render per request
-  const user = await getCurrentUser();
+async function Dashboard() {
+  const user = await requirePageUser();
   const projects = await listProjects(user.id);
 
-  if (projects.length === 0) {
-    return (
-      <p className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
-        No projects yet. Create one above and describe the site you want.
-      </p>
-    );
-  }
-
-  return (
-    <ul className="grid gap-3 sm:grid-cols-2">
-      {projects.map((p) => (
-        <li key={p.id}>
-          <Link
-            href={`/project/${p.id}`}
-            className="flex h-full flex-col gap-1 rounded-xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            <span className="font-medium">{p.name}</span>
-            <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <FileCode2 className="size-3.5" />
-              {kits[p.kit as KitId]?.label ?? p.kit} · {p._count.files} files
-            </span>
-            <span className="text-xs text-muted-foreground">Updated {dateFormat.format(p.updatedAt)}</span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
       <header className="flex items-center justify-between border-b px-4 py-3 sm:px-6">
@@ -52,12 +22,17 @@ export default function Home() {
           <Sparkles className="size-4 text-primary" />
           AgentWebBuilder
         </span>
-        <ThemeToggle />
+        <div className="flex items-center gap-1">
+          <UserMenu email={user.email} />
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-10 sm:px-6">
         <section className="flex flex-col gap-2">
-          <h1 className="text-3xl font-semibold tracking-tight">Build a website by chatting with Claude</h1>
+          <h1 className="text-3xl font-semibold tracking-tight">
+            {user.name ? `Hi ${user.name.split(" ")[0]}, what` : "What"} are we building today?
+          </h1>
           <p className="text-muted-foreground">
             Create a project, describe the site you want, and watch it appear in the live preview.
           </p>
@@ -67,11 +42,41 @@ export default function Home() {
 
         <section className="flex flex-col gap-3">
           <h2 className="text-sm font-medium text-muted-foreground">Your projects</h2>
-          <Suspense fallback={<p className="text-sm text-muted-foreground">Loading projects…</p>}>
-            <ProjectList />
-          </Suspense>
+          {projects.length === 0 ? (
+            <p className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
+              No projects yet. Create one above and describe the site you want.
+            </p>
+          ) : (
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {projects.map((p) => (
+                <li key={p.id}>
+                  <ProjectCard
+                    id={p.id}
+                    name={p.name}
+                    kitLabel={kits[p.kit as KitId]?.label ?? p.kit}
+                    fileCount={p._count.files}
+                    updatedLabel={dateFormat.format(p.updatedAt)}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       </main>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex flex-1 items-center justify-center gap-2 text-muted-foreground">
+          <Loader2 className="size-4 animate-spin" /> Loading…
+        </div>
+      }
+    >
+      <Dashboard />
+    </Suspense>
   );
 }

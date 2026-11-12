@@ -1,7 +1,9 @@
-// Seeds a demo user for local development.
-// Login: demo@example.com / demo12345 (password hashing arrives with auth in M3).
+// Development seed. Safe to run repeatedly.
+// - Demo login: demo@example.com / demo12345 (development only)
+// - Backfills a first version for projects created before version history existed.
 import "dotenv/config";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import bcrypt from "bcryptjs";
 import { PrismaClient } from "../src/generated/prisma/client";
 
 const db = new PrismaClient({
@@ -9,16 +11,26 @@ const db = new PrismaClient({
 });
 
 async function main() {
-  const user = await db.user.upsert({
-    where: { email: "demo@example.com" },
-    update: {},
-    create: {
-      email: "demo@example.com",
-      name: "Demo User",
-      passwordHash: "UNSET-until-M3",
-    },
-  });
-  console.log(`Seeded user ${user.email} (${user.id})`);
+  if (process.env.NODE_ENV === "production") throw new Error("Refusing to seed a demo user in production.");
+
+  const existing = await db.user.findUnique({ where: { email: "demo@example.com" } });
+  const passwordHash = await bcrypt.hash("demo12345", 12);
+  const user = existing
+    ? existing.passwordHash.startsWith("$2")
+      ? existing
+      : await db.user.update({ where: { id: existing.id }, data: { passwordHash } })
+    : await db.user.create({ data: { email: "demo@example.com", name: "Demo User", passwordHash } });
+  console.log(`Demo user ready: ${user.email} / demo12345`);
+
+  const unversioned = await db.project.findMany({ where: { versions: { none: {} } }, include: { files: true } });
+  for (const project of unversioned) {
+    const snapshot = JSON.stringify(Object.fromEntries(project.files.map((f) => [f.path, f.content])));
+    const version = await db.version.create({
+      data: { projectId: project.id, number: 1, source: "template", summary: "Initial snapshot", snapshot },
+    });
+    await db.project.update({ where: { id: project.id }, data: { currentVersionId: version.id } });
+  }
+  if (unversioned.length) console.log(`Backfilled v1 for ${unversioned.length} project(s).`);
 }
 
 main()

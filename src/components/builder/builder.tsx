@@ -1,15 +1,17 @@
 "use client";
 
-import { ArrowLeft, Code2, Eye, Loader2 } from "lucide-react";
+import { ArrowLeft, Code2, Eye, History, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { UserMenu } from "@/components/user-menu";
 import { Badge } from "@/components/ui/badge";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { readEventStream } from "@/lib/chat-events";
 import { ChatPanel } from "./chat-panel";
+import { HistoryPanel } from "./history-panel";
 import { PreviewPanel } from "./preview-panel";
 
 // Monaco is browser-only.
@@ -31,6 +33,7 @@ export type BuilderMessage = {
   changedFiles: string[];
   activity: Activity[];
   error?: string;
+  versionNumber?: number;
   streaming?: boolean;
   thinking?: boolean;
   usage?: { inputTokens: number; outputTokens: number; costUsd?: number };
@@ -40,20 +43,24 @@ export type ProjectInfo = { id: string; name: string; kit: string };
 
 type Props = {
   project: ProjectInfo;
+  userEmail: string;
   initialFiles: Record<string, string>;
   initialMessages: BuilderMessage[];
+  initialPreviewToken: string;
   busyOnLoad: boolean;
 };
 
 let activityCounter = 0;
 
-export function Builder({ project, initialFiles, initialMessages, busyOnLoad }: Props) {
+export function Builder({ project, userEmail, initialFiles, initialMessages, initialPreviewToken, busyOnLoad }: Props) {
   const [files, setFiles] = useState(initialFiles);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [messages, setMessages] = useState(initialMessages);
   const [running, setRunning] = useState(false);
   const [tab, setTab] = useState("preview");
   const [previewVersion, setPreviewVersion] = useState(0);
+  const [previewToken, setPreviewToken] = useState(initialPreviewToken);
+  const [historyKey, setHistoryKey] = useState(0);
   const [selectedPath, setSelectedPath] = useState<string | null>(
     "index.html" in initialFiles ? "index.html" : (Object.keys(initialFiles)[0] ?? null),
   );
@@ -62,8 +69,9 @@ export function Builder({ project, initialFiles, initialMessages, busyOnLoad }: 
   const refreshFiles = useCallback(async () => {
     const res = await fetch(`/api/projects/${project.id}/files`, { cache: "no-store" });
     if (!res.ok) return;
-    const data = (await res.json()) as { files: { path: string; content: string }[] };
+    const data = (await res.json()) as { files: { path: string; content: string }[]; previewToken: string };
     setFiles(Object.fromEntries(data.files.map((f) => [f.path, f.content])));
+    setPreviewToken(data.previewToken);
   }, [project.id]);
 
   /** Debounced: refresh the file list and reload the preview after the agent writes. */
@@ -144,7 +152,8 @@ export function Builder({ project, initialFiles, initialMessages, busyOnLoad }: 
             updateLast((m) => ({ ...m, error: event.message }));
             break;
           case "saved":
-            updateLast((m) => ({ ...m, id: event.messageId }));
+            updateLast((m) => ({ ...m, id: event.messageId, versionNumber: event.versionNumber }));
+            setHistoryKey((k) => k + 1);
             break;
         }
       }
@@ -179,7 +188,25 @@ export function Builder({ project, initialFiles, initialMessages, busyOnLoad }: 
       return next;
     });
     setPreviewVersion((v) => v + 1);
+    setHistoryKey((k) => k + 1);
     return null;
+  }
+
+  async function onRestored(versionNumber: number) {
+    setDrafts({});
+    await refreshFiles();
+    setPreviewVersion((v) => v + 1);
+    setHistoryKey((k) => k + 1);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `restore-${Date.now()}`,
+        role: "assistant",
+        text: `Restored the project files. They are now saved as **v${versionNumber}**.`,
+        changedFiles: [],
+        activity: [],
+      },
+    ]);
   }
 
   function setDraft(path: string, value: string) {
@@ -213,7 +240,8 @@ export function Builder({ project, initialFiles, initialMessages, busyOnLoad }: 
             <Loader2 className="size-3.5 animate-spin" /> Claude is working…
           </span>
         )}
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-1">
+          <UserMenu email={userEmail} />
           <ThemeToggle />
         </div>
       </header>
@@ -237,6 +265,9 @@ export function Builder({ project, initialFiles, initialMessages, busyOnLoad }: 
                 <TabsTrigger value="preview">
                   <Eye /> Preview
                 </TabsTrigger>
+                <TabsTrigger value="history">
+                  <History /> History
+                </TabsTrigger>
                 <TabsTrigger value="code">
                   <Code2 /> Code
                   {Object.keys(drafts).length > 0 && (
@@ -246,7 +277,22 @@ export function Builder({ project, initialFiles, initialMessages, busyOnLoad }: 
               </TabsList>
             </div>
             <TabsContent value="preview" className="min-h-0 flex-1">
-              <PreviewPanel project={project} files={files} version={previewVersion} onReload={() => setPreviewVersion((v) => v + 1)} />
+              <PreviewPanel
+                project={project}
+                previewToken={previewToken}
+                files={files}
+                version={previewVersion}
+                onReload={() => setPreviewVersion((v) => v + 1)}
+              />
+            </TabsContent>
+            <TabsContent value="history" className="min-h-0 flex-1">
+              <HistoryPanel
+                projectId={project.id}
+                refreshKey={historyKey}
+                running={running}
+                hasDrafts={Object.keys(drafts).length > 0}
+                onRestored={onRestored}
+              />
             </TabsContent>
             <TabsContent value="code" className="min-h-0 flex-1">
               <CodePanel

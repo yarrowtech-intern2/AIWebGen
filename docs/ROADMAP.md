@@ -25,8 +25,8 @@ Each milestone ends with something you can run and check. Milestones are built i
 - Projects saved in SQLite under the demo user (accounts arrive in M3); simple project list + "new project" form on `/`
 - **Check:** prompt, watch the site appear, then ask for an edit and see it reflected
 
-### M3: Projects, versions, accounts
-- Email/password register + login (Auth.js Credentials), protected routes
+### M3: Projects, versions, accounts ✅ (2026-11-12)
+- Email/password register + login (own session module, see D19), protected pages and API routes, rate-limited login
 - Dashboard: list / create (pick a kit) / rename / delete projects
 - One version per AI turn and per manual save; history panel with restore
 - ~~Chat history saved and replayed as context~~ (done in M2)
