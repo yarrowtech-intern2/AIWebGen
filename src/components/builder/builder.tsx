@@ -1,8 +1,10 @@
 "use client";
 
-import { Code2, Eye, History, Loader2, MessageSquare } from "lucide-react";
+import { Code2, Download, Eye, History, Loader2, MessageSquare } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-is-mobile";
@@ -67,6 +69,7 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
   const [previewVersion, setPreviewVersion] = useState(0);
   const [previewToken, setPreviewToken] = useState(initialPreviewToken);
   const [historyKey, setHistoryKey] = useState(0);
+  const [buildErrors, setBuildErrors] = useState<string[]>([]);
   const [selectedPath, setSelectedPath] = useState<string | null>(
     "index.html" in initialFiles ? "index.html" : (Object.keys(initialFiles)[0] ?? null),
   );
@@ -96,10 +99,22 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
     setPreviewToken(data.previewToken);
   }, [project.id]);
 
+  /** React kit: ask the server whether the preview builds, so errors can be shown and fixed. */
+  const checkBuild = useCallback(async () => {
+    if (project.kit !== "react-vite") return;
+    const res = await fetch(`/api/projects/${project.id}/build`, { cache: "no-store" });
+    if (res.ok) setBuildErrors(((await res.json()) as { errors: string[] }).errors);
+  }, [project.id, project.kit]);
+
+  useEffect(() => {
+    void checkBuild();
+  }, [checkBuild]);
+
   const bumpPreview = useCallback(() => {
     setPreviewVersion((v) => v + 1);
+    void checkBuild();
     if (mobileViewRef.current !== "preview") setPreviewUnseen(true);
-  }, []);
+  }, [checkBuild]);
 
   /** Debounced: refresh the file list and reload the preview after the agent writes. */
   const scheduleRefresh = useCallback(() => {
@@ -287,6 +302,14 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
       files={files}
       version={previewVersion}
       onReload={() => setPreviewVersion((v) => v + 1)}
+      buildErrors={buildErrors}
+      fixDisabled={running}
+      onAskFix={() => {
+        show("chat");
+        void sendMessage(
+          `The preview fails to build with these errors. Please fix them:\n\n${buildErrors.join("\n\n").slice(0, 4000)}`,
+        );
+      }}
     />
   );
   const code = (
@@ -318,6 +341,18 @@ export function Builder({ project: initialProject, userEmail, initialFiles, init
         running={running}
         userEmail={userEmail}
         onRenamed={(name) => setProject((p) => ({ ...p, name }))}
+        actions={
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" asChild>
+                <a href={`/api/projects/${project.id}/export`} download aria-label="Download ZIP">
+                  <Download className="size-4" />
+                </a>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Download as ZIP</TooltipContent>
+          </Tooltip>
+        }
       />
 
       {isMobile ? (

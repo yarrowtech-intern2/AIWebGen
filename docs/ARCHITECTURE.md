@@ -44,7 +44,7 @@ flowchart LR
 | UI | Tailwind CSS, shadcn/ui, lucide icons, `react-resizable-panels` for the split layout |
 | Code editor | `@monaco-editor/react` |
 | Preview: Static kit | Server route that serves project files from the database into a sandboxed iframe |
-| Preview: React kit (and future Vue/Svelte) | Sandpack (`@codesandbox/sandpack-react`), an in-browser bundler |
+| Preview: React kit | esbuild bundle built on the server in memory + import map to esm.sh (D27) |
 | AI (testing) | `@anthropic-ai/claude-agent-sdk`, using the developer's local Claude Code login |
 | AI (production) | `@anthropic-ai/sdk`, with `ANTHROPIC_API_KEY` |
 | Validation | `zod` (tool input schemas, API bodies) |

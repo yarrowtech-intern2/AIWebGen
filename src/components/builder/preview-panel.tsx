@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Monitor, RotateCw, Smartphone, Tablet } from "lucide-react";
+import { AlertTriangle, ExternalLink, Monitor, RotateCw, Smartphone, Sparkles, Tablet } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -19,22 +19,19 @@ type Props = {
   files: Record<string, string>;
   version: number;
   onReload: () => void;
+  /** React kit: errors from the last preview build. */
+  buildErrors?: string[];
+  onAskFix?: () => void;
+  fixDisabled?: boolean;
 };
 
-export function PreviewPanel({ project, previewToken, files, version, onReload }: Props) {
+export function PreviewPanel({ project, previewToken, files, version, onReload, buildErrors, onAskFix, fixDisabled }: Props) {
   const [device, setDevice] = useState<(typeof DEVICES)[number]["id"]>("desktop");
   const [page, setPage] = useState("index.html");
 
-  if (project.kit !== "static") {
-    return (
-      <div className="flex h-full items-center justify-center p-8 text-center text-sm text-muted-foreground">
-        Live preview for the {project.kit} kit arrives in M4. The files are already in the Code tab.
-      </div>
-    );
-  }
-
+  // React apps have a single entry page; static sites can have many.
   const pages = Object.keys(files)
-    .filter((p) => p.endsWith(".html"))
+    .filter((p) => p.endsWith(".html") && (project.kit === "static" || p === "index.html"))
     .sort((a, b) => (a === "index.html" ? -1 : b === "index.html" ? 1 : a.localeCompare(b)));
   const currentPage = pages.includes(page) ? page : (pages[0] ?? "index.html");
   const src = `/preview/${previewToken}/${currentPage}?v=${version}`;
@@ -44,6 +41,7 @@ export function PreviewPanel({ project, previewToken, files, version, onReload }
     <div className="flex h-full flex-col">
       <div className="flex h-10 shrink-0 items-center gap-1 border-b px-2">
         <select
+          hidden={pages.length < 2}
           value={currentPage}
           onChange={(e) => setPage(e.target.value)}
           aria-label="Page"
@@ -95,6 +93,20 @@ export function PreviewPanel({ project, previewToken, files, version, onReload }
           <TooltipContent>Open in new tab</TooltipContent>
         </Tooltip>
       </div>
+
+      {buildErrors && buildErrors.length > 0 && (
+        <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+          <AlertTriangle className="size-4 shrink-0" />
+          <span className="min-w-0 flex-1 truncate" title={buildErrors.join("\n")}>
+            The preview has a build error: {buildErrors[0].split("\n")[0]}
+          </span>
+          {onAskFix && (
+            <Button size="sm" onClick={onAskFix} disabled={fixDisabled}>
+              <Sparkles /> Ask Claude to fix
+            </Button>
+          )}
+        </div>
+      )}
 
       <div className={cn("flex min-h-0 flex-1 justify-center overflow-auto", device !== "desktop" && "bg-muted/60 p-4")}>
         <iframe

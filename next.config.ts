@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     "@anthropic-ai/claude-agent-sdk",
     "better-sqlite3",
     "@prisma/adapter-better-sqlite3",
+    "esbuild",
   ],
   turbopack: {
     rules: {

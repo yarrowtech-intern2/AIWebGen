@@ -40,6 +40,11 @@ export async function getProject(userId: string, projectId: string) {
   return db.project.findFirst({ where: { id: projectId, userId } });
 }
 
+/** Kit of a project, without an ownership check (callers must have authorised access). */
+export async function getProjectKit(projectId: string) {
+  return (await db.project.findUnique({ where: { id: projectId }, select: { kit: true } }))?.kit ?? null;
+}
+
 export async function renameProject(projectId: string, name: string) {
   await db.project.update({ where: { id: projectId }, data: { name } });
 }

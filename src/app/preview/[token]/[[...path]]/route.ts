@@ -1,6 +1,9 @@
 import path from "node:path";
 import { verifyPreviewToken } from "@/server/projects/preview-token";
-import { getFile } from "@/server/projects/service";
+import { buildReactPreview, renderBuildErrorPage, renderReactIndex } from "@/server/projects/react-preview";
+import { getFile, getProjectKit, listFiles } from "@/server/projects/service";
+
+const BUNDLE_DIR = "__awb";
 
 const CONTENT_TYPES: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -53,6 +56,32 @@ export async function GET(_req: Request, ctx: RouteContext<"/preview/[token]/[[.
   let filePath = (segments ?? []).map((s) => decodeURIComponent(s)).join("/");
   if (filePath === "" || filePath.endsWith("/")) filePath += "index.html";
   if (filePath.split("/").some((s) => s === ".." || s === ".")) return new Response("Bad path", { status: 400 });
+
+  const kit = await getProjectKit(projectId);
+  if (!kit) return htmlResponse(404, messagePage("Project not found", "This project no longer exists."));
+
+  // React projects: index.html and the bundle are produced by the in-memory build.
+  if (kit === "react-vite" && (filePath === "index.html" || filePath.startsWith(`${BUNDLE_DIR}/`))) {
+    const files = Object.fromEntries((await listFiles(projectId)).map((f) => [f.path, f.content]));
+    const build = await buildReactPreview(projectId, files);
+    if (!build.ok) return htmlResponse(200, renderBuildErrorPage(build.errors));
+    if (filePath === `${BUNDLE_DIR}/bundle.js`) {
+      return new Response(build.js, { headers: { ...BASE_HEADERS, "Content-Type": CONTENT_TYPES[".js"] } });
+    }
+    if (filePath === `${BUNDLE_DIR}/bundle.css`) {
+      return new Response(build.css, { headers: { ...BASE_HEADERS, "Content-Type": CONTENT_TYPES[".css"] } });
+    }
+    if (filePath === "index.html" && files["index.html"]) {
+      const html = renderReactIndex(files["index.html"], build, `/preview/${token}/${BUNDLE_DIR}`);
+      return new Response(html, {
+        headers: {
+          ...BASE_HEADERS,
+          "Content-Type": CONTENT_TYPES[".html"],
+          "Content-Security-Policy": "sandbox allow-scripts allow-forms allow-popups allow-modals",
+        },
+      });
+    }
+  }
 
   let file = await getFile(projectId, filePath);
   // Allow extensionless links like /about -> about.html

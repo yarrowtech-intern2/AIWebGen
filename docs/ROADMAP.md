@@ -43,8 +43,8 @@ Each milestone ends with something you can run and check. Milestones are built i
 - "Publish" button: push the project to a repo, then deploy to **GitHub Pages** or **Vercel** (user picks)
 - Claude gets an allowlisted set of GitHub MCP tools in chat (import a repo, open a PR), switched on per project
 
-### M4: React kit, templates, export (M4b)
-- `react-vite` kit + Sandpack preview
+### M4b: React preview, templates, export ✅ (2026-11-12; React templates pending regeneration)
+- `react-vite` kit + live preview, built on the server with esbuild (see D27); build errors show an "Ask Claude to fix" button
 - Templates: 3–4 per kit, picked in the "new project" dialog
 - ZIP export (with a run README for each kit)
 - **Check:** an exported React ZIP runs with `npm install && npm run dev`; a Static ZIP opens in a browser
