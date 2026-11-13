@@ -43,7 +43,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
 
   const isLogin = mode === "login";
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-4">
+    <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:gap-4">
       {!isLogin && (
         <label className="flex flex-col gap-1.5 text-sm">
           Name <span className="sr-only">(optional)</span>

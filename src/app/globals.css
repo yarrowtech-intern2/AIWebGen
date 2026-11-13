@@ -6,8 +6,11 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-faint: var(--faint);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-onest);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -49,72 +52,79 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /* Palette shared with the CEO Agent parent app. */
+  --background: #eef0f7;
+  --foreground: #26263a;
+  --card: #ffffff;
+  --card-foreground: #26263a;
+  --popover: #ffffff;
+  --popover-foreground: #26263a;
+  --primary: #26263a;
+  --primary-foreground: #ffffff;
+  --secondary: #e6e8f2;
+  --secondary-foreground: #26263a;
+  --muted: #e6e8f2;
+  --muted-foreground: #6b6b7c;
+  --faint: #9d9dab;
+  --accent: #e6e8f2;
+  --accent-foreground: #26263a;
+  --brand: #c25e1a;
+  --brand-foreground: #ffffff;
+  --destructive: #e5484d;
+  --border: #e3e5f0;
+  --input: #dcdfeb;
+  --ring: #c25e1a;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+  --sidebar: #f5f6fb;
+  --sidebar-foreground: #26263a;
+  --sidebar-primary: #26263a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6e8f2;
+  --sidebar-accent-foreground: #26263a;
+  --sidebar-border: #e3e5f0;
+  --sidebar-ring: #c25e1a;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --background: #131319;
+  --foreground: #f2f2f5;
+  --card: #1c1c26;
+  --card-foreground: #f2f2f5;
+  --popover: #1c1c26;
+  --popover-foreground: #f2f2f5;
+  --primary: #f2f2f5;
+  --primary-foreground: #131319;
+  --secondary: #24242f;
+  --secondary-foreground: #f2f2f5;
+  --muted: #22222c;
+  --muted-foreground: #b4b4c3;
+  --faint: #8c8c9d;
+  --accent: #262632;
+  --accent-foreground: #f2f2f5;
+  --brand: #ea7a35;
+  --brand-foreground: #ffffff;
+  --destructive: #f2555a;
+  --border: #2b2b37;
+  --input: #33333f;
+  --ring: #ea7a35;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar: #17171f;
+  --sidebar-foreground: #f2f2f5;
+  --sidebar-primary: #ea7a35;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #262632;
+  --sidebar-accent-foreground: #f2f2f5;
+  --sidebar-border: #2b2b37;
+  --sidebar-ring: #ea7a35;
 }
 
 @layer base {
@@ -126,5 +136,158 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Surfaces shared with the CEO Agent app: glass panels, the WebGL     */
+/* strand layer, the home bot and the composer pill.                   */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  .glass-surface {
+    background: color-mix(in srgb, var(--card) 52%, transparent);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid color-mix(in srgb, white 45%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 55%, transparent),
+      inset 0 0 0 1px color-mix(in srgb, white 12%, transparent),
+      0 10px 32px rgb(0 0 0 / 0.08);
+  }
+  .dark .glass-surface {
+    /* Denser than light mode so the bright strands don't wash out text. */
+    background: color-mix(in srgb, var(--card) 84%, transparent);
+    border-color: color-mix(in srgb, white 12%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 8%, transparent),
+      inset 0 0 0 1px color-mix(in srgb, white 5%, transparent),
+      0 10px 32px rgb(0 0 0 / 0.35);
+  }
+
+  /* Full-viewport WebGL strands; content sits above it (z-index 1+). */
+  .laser-flow-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Bot slot: both engines render a .metallic-bot-root filling the slot. */
+  .home-bot-slot {
+    position: relative;
+    width: var(--bot-size, clamp(170px, 46vw, 300px));
+    aspect-ratio: 1;
+  }
+  .home-bot-slot .metallic-bot-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    overflow: visible;
+  }
+  .home-bot-slot .metallic-bot-canvas {
+    position: absolute;
+    display: block;
+    pointer-events: auto;
+  }
+  /* Phones: no room at the bot's side, so its speech sits above it. */
+  @media (max-width: 1023px) {
+    .home-bot-slot .led-bot-bubble {
+      right: auto;
+      left: 50%;
+      top: auto;
+      bottom: 100%;
+      flex-direction: row;
+      text-align: left;
+      max-width: min(240px, 80vw);
+      transform: translate(-50%, 6px);
+    }
+    .home-bot-slot .led-bot-bubble.show {
+      transform: translate(-50%, 0);
+    }
+  }
+
+  /* Composer: glass pill with a slowly spinning gradient rim. */
+  .composer-shell {
+    position: relative;
+    isolation: isolate;
+  }
+  .composer-shell::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--composer-angle),
+      color-mix(in srgb, var(--brand) 95%, transparent),
+      transparent 18%,
+      transparent 42%,
+      color-mix(in srgb, #ffb020 90%, transparent) 52%,
+      transparent 62%,
+      transparent 86%,
+      color-mix(in srgb, var(--brand) 95%, transparent) 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: composer-spin 5s linear infinite;
+  }
+  /* A soft pool of the bot's colour behind the glass, where the strands land. */
+  .composer-glow {
+    position: absolute;
+    z-index: -2;
+    left: 72%;
+    top: 50%;
+    width: 280px;
+    height: 280px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--bot-accent-color, var(--brand)) 30%, transparent),
+      transparent 70%
+    );
+    filter: blur(14px);
+    pointer-events: none;
+    transition: background 0.6s ease;
+  }
+}
+
+@property --composer-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes composer-spin {
+  to {
+    --composer-angle: 360deg;
+  }
+}
+@keyframes mic-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(229 72 77 / 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgb(229 72 77 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laser-flow-layer {
+    display: none;
+  }
+  .composer-shell::before {
+    animation: none;
   }
 }

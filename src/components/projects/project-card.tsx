@@ -43,7 +43,7 @@ export function ProjectCard({ id, name, kitLabel, fileCount, updatedLabel }: Pro
   if (mode === "rename") {
     return (
       <form
-        className="flex h-full flex-col gap-2 rounded-xl border bg-card p-4"
+        className="glass-surface flex h-full flex-col gap-2 rounded-2xl p-4"
         onSubmit={async (e) => {
           e.preventDefault();
           if (await call("PATCH", { name: draft })) setMode("view");
@@ -64,12 +64,17 @@ export function ProjectCard({ id, name, kitLabel, fileCount, updatedLabel }: Pro
   }
 
   return (
-    <div className="group relative flex h-full flex-col rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-muted/40">
+    <div className="glass-surface group relative flex h-full flex-col rounded-2xl transition-transform hover:-translate-y-0.5">
       <Link
         href={`/project/${id}`}
-        className="flex flex-1 flex-col gap-1 rounded-xl p-4 pr-20 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+        className="flex flex-1 flex-col gap-1 rounded-2xl p-4 pr-20 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
       >
-        <span className="font-medium">{name}</span>
+        <span className="flex items-center gap-2.5 font-semibold">
+          <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-brand/12 text-sm text-brand uppercase">
+            {name.trim().slice(0, 1) || "?"}
+          </span>
+          <span className="truncate">{name}</span>
+        </span>
         <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <FileCode2 className="size-3.5" />
           {kitLabel} · {fileCount} files
@@ -78,7 +83,7 @@ export function ProjectCard({ id, name, kitLabel, fileCount, updatedLabel }: Pro
       </Link>
 
       {mode === "confirm-delete" ? (
-        <div className="flex items-center gap-2 border-t px-4 py-2 text-xs">
+        <div className="flex flex-wrap items-center gap-2 border-t px-4 py-2 text-xs">
           <span className="text-destructive">Delete this project and its history?</span>
           <Button size="xs" variant="destructive" disabled={busy} onClick={() => call("DELETE")}>
             {busy ? <Loader2 className="animate-spin" /> : <Trash2 />} Delete

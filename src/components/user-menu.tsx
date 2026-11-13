@@ -16,12 +16,21 @@ export function UserMenu({ email }: { email: string }) {
 
   return (
     <div className="flex items-center gap-1">
-      <span className="hidden max-w-48 truncate text-xs text-muted-foreground sm:inline" title={email}>
-        {email}
-      </span>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label="Log out" onClick={logout}>
+          <span
+            tabIndex={0}
+            aria-label={`Signed in as ${email}`}
+            className="flex size-8 shrink-0 items-center justify-center rounded-full bg-foreground text-sm font-semibold text-background uppercase"
+          >
+            {email.slice(0, 1)}
+          </span>
+        </TooltipTrigger>
+        <TooltipContent>{email}</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="ghost" size="icon" className="rounded-full" aria-label="Log out" onClick={logout}>
             <LogOut className="size-4" />
           </Button>
         </TooltipTrigger>

@@ -24,7 +24,7 @@ export function ThemeToggle() {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label={LABELS[current]} onClick={() => setTheme(next)}>
+        <Button variant="ghost" size="icon" className="rounded-full" aria-label={LABELS[current]} onClick={() => setTheme(next)}>
           <Icon className="size-4" />
         </Button>
       </TooltipTrigger>

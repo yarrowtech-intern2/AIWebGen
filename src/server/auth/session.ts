@@ -31,6 +31,8 @@ export async function getSessionUser(): Promise<SessionUser | null> {
 /** For pages: the logged-in user, or a redirect to /login. */
 export async function requirePageUser(): Promise<SessionUser> {
   const user = await getSessionUser();
-  if (!user) redirect("/login");
+  // `expired` tells the proxy to drop the cookie: it can be validly signed but name a user
+  // that no longer exists (deleted, or a different database), which would otherwise loop.
+  if (!user) redirect("/login?expired=1");
   return user;
 }

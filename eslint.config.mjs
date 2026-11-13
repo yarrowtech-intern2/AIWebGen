@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // WebGL/canvas engines ported as-is from the CEO Agent app.
+    "src/components/home/engines/**",
   ]),
 ]);
 

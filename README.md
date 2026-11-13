@@ -53,16 +53,17 @@ Other settings: `AI_MODEL` (default `claude-opus-5-5`), `AI_EFFORT` (`low`…`ma
 
 Both providers drive the same file tools (`list_files`, `read_file`, `write_file`, `edit_file`, `delete_file`) against a virtual project. Claude has no shell and no access to the real disk.
 
-## Deploy to Render
+## Deploy to Render (free)
 
-[render.yaml](render.yaml) is a Render Blueprint for a Node web service (Starter) and a managed Postgres database.
+[render.yaml](render.yaml) is a Render Blueprint for a free Node web service. The database is a free [Neon](https://neon.tech) Postgres.
 
-1. Push the repo to GitHub
-2. In Render: **New -> Blueprint**, then pick the repo
-3. Enter `ANTHROPIC_API_KEY` when asked. `AUTH_SECRET` is generated and `DATABASE_URL` is wired to the database automatically
-4. Apply. Every deploy builds, runs `prisma migrate deploy`, then starts `next start`
+1. Create a Neon project (region: the same as the Render service) and copy its **direct** connection string (not the "pooled" one)
+2. Push the repo to GitHub
+3. In Render: **New -> Blueprint**, then pick the repo
+4. Paste the Neon string as `DATABASE_URL` and your key as `ANTHROPIC_API_KEY`. `AUTH_SECRET` is generated
+5. Apply. Every deploy builds, then runs `prisma migrate deploy` and `next start`
 
-Change `region` in render.yaml (both entries) to the one closest to your users before the first deploy.
+The free service sleeps after 15 minutes without traffic; the next visit takes about a minute to wake it.
 
 ## Scripts
 

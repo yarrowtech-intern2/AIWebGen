@@ -7,7 +7,15 @@ import { SESSION_COOKIE, verifySessionToken } from "@/server/auth/token";
  * session itself; this is not the security boundary.
  */
 export async function proxy(request: NextRequest) {
-  const { pathname, search } = request.nextUrl;
+  const { pathname, search, searchParams } = request.nextUrl;
+
+  // A page found the session's user missing: clear the stale cookie and show the login page.
+  if (pathname === "/login" && searchParams.has("expired")) {
+    const res = NextResponse.next();
+    res.cookies.delete(SESSION_COOKIE);
+    return res;
+  }
+
   const loggedIn = (await verifySessionToken(request.cookies.get(SESSION_COOKIE)?.value)) !== null;
   const isAuthPage = pathname === "/login" || pathname === "/register";
 
